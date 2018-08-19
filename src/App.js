@@ -1,26 +1,21 @@
 import React, {Component} from 'react';
 
 import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import Eux from "./hoc/Eux/Eux";
+import MainLayout from "./Container/Layout/MainLayout/MainLayout";
 
 
 class App extends Component {
 
-    state = {
-       
+    state = {};
 
-        
-    };
 
-    
     render() {
-        
+
         return (
             <Eux>
-
-                <main>
-            <h1>React POS </h1>
-            </main>
-
+                <MainLayout/>
             </Eux>
 
         );
@@ -29,18 +24,11 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
 
-    return {
-        
-        isFailedReg: state.helpRed.failedReg,
-
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        
-        onTCHandler: (data) => dispatch(actions.tcPage(data)),
-    }
+    return {}
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
