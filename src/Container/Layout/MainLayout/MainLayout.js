@@ -3,7 +3,7 @@ import Navbar from "../../../Components/MainNavbar/Navbar";
 import CustomerBody from "../../../Components/MiddleComponent/CustomerBody";
 import ItemBody from "../../../Components/MiddleComponent/ItemBody";
 import {connect} from "react-redux";
-
+import PlaceOrder from "../../../Components/PlaceOrderComponent/PlaceOrder";
 
 class App extends Component{
     render(){
@@ -14,14 +14,13 @@ class App extends Component{
         }else if(this.props.item){
             bodyShow = <ItemBody/>
         }else if(this.props.placeorder){
-
+            bodyShow = <PlaceOrder/>
         }
 
 
         return(
             <div>
                 <Navbar/>
-
                 {bodyShow}
 
             </div>

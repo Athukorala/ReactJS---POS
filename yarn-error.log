@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Athukorala\AppData\Local\Yarn\Cache\v1\npm-doctrine-1.5.0-379dce730f6166f76cefa4e6707a159b02c5a6fa\CHANGELOG.md' -> 'C:\Ceyentra Projects\diamot\Diamot\App\node_modules\react-google-autocomplete-address-fields\node_modules\doctrine\CHANGELOG.md'
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Athukorala\AppData\Local\Yarn\Cache\v1\npm-doctrine-1.5.0-379dce730f6166f76cefa4e6707a159b02c5a6fa\CHANGELOG.md' -> 'C:\Ceyentra Projects\diamot\Diamot\SignIn\node_modules\react-google-autocomplete-address-fields\node_modules\doctrine\CHANGELOG.md'
 
 npm manifest: 
   {

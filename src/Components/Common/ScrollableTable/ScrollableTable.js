@@ -26,7 +26,7 @@ class ScrollTable extends Component{
         });
 
         const rows=tbodyData.map((row,index)=>(
-            <tr key={index} onClick={() => this.props.tableOnClick(row["ticketId"],row["state"])} style={trStyle} >
+            <tr key={index} style={trStyle} >
                 {
                     Object.keys(row).map((col,index)=>(
                         <td style={tdStyle} key={index} align="center">{row[col]}</td>

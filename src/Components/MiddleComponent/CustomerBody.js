@@ -3,6 +3,7 @@ import classes from './style.css';
 import Add from "../CustomerComponent/AddCustomer/Add";
 import Update from "../CustomerComponent/UpdateCustomer/Update";
 import View from "../CustomerComponent/ViewCustomers/View";
+import SignIn from "../Common/SignInForm/SignIn";
 
 const col = {
     marginTop: '2%',
@@ -13,9 +14,11 @@ const col = {
 class App extends Component {
 
     state = {
+
         add: true,
         update: false,
-        view: false
+        view: false,
+
     };
 
     componentDidMount(){
