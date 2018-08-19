@@ -5,7 +5,7 @@ import Button from "../../Common/Button/Button";
 class App extends Component{
     render(){
         return(
-            <div style={{ marginLeft: '10%',marginTop:'5%'}}>
+            <div style={{ marginLeft: '10%',marginTop:'3%'}}>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlSelect1">Select Id</label>
                     <select className="form-control" id="exampleFormControlSelect1" style={{width:'30%',borderRadius:'20px'}}>
@@ -17,15 +17,20 @@ class App extends Component{
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleFormControlInput1">Customer name</label>
-                    <Input id="exampleFormControlInput1" placeholder="Name"/>
+                    <label htmlFor="exampleFormControlInput1">Item Description</label>
+                    <Input id="exampleFormControlInput1" placeholder="description"/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleFormControlInput2">Customer Address</label>
-                    <Input id="exampleFormControlInput2" placeholder="Address"/>
+                    <label htmlFor="exampleFormControlInput2">Item Qty</label>
+                    <Input id="exampleFormControlInput2" placeholder="Qty"/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="exampleFormControlInput2">Item Price</label>
+                    <Input id="exampleFormControlInput2" placeholder="Price"/>
                 </div>
                 <br/>
-                <Button backgroundColor="black" children="Update Customer"/>
+                <Button backgroundColor="black" children="Update Item"/>
 
 
 

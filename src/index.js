@@ -8,11 +8,12 @@ import {Provider} from "react-redux";
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunk from 'redux-thunk';
 
+import bodyReducer from '../src/store/reducer/BodyReducer';
 
 const rootReducer = combineReducers({
 
-    // socialReducer: socialMediaReducer,
-    // comRed:componentReducer
+    isBodyReducer: bodyReducer,
+
 });
 
 

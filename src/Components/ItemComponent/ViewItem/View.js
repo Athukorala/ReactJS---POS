@@ -32,7 +32,7 @@ class App extends Component{
     }
 
 }
-const theadData=["Id","Name","Address"];
+const theadData=["Id","Description","Qty","Price"];
 
 // add the table body data
 

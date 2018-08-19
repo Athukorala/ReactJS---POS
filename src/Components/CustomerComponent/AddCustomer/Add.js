@@ -15,7 +15,7 @@ class App extends Component{
                     <Input id="exampleFormControlInput2" placeholder="Address"/>
                 </div>
                 <br/>
-                <Button children="Save Customer"/>
+                <Button backgroundColor="black" children="Save Customer"/>
 
 
             </div>

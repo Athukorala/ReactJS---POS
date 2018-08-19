@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import classes from './style.css';
-import Add from "../CustomerComponent/AddCustomer/Add";
-import Update from "../CustomerComponent/UpdateCustomer/Update";
-import View from "../CustomerComponent/ViewCustomers/View";
+import Add from "../ItemComponent/AddItem/Add";
+import Update from "../ItemComponent/UpdateItem/Update";
+import View from "../ItemComponent/ViewItem/View";
 
 const col = {
     marginTop: '2%',
     textAlign: 'center',
-    height: '40px', borderBottom: '1px solid lightgray', cursor: 'pointer',color:'white'
+    height: '40px', borderBottom: '1px solid lightgray', cursor: 'pointer'
 };
 
 class App extends Component {
@@ -59,17 +59,17 @@ class App extends Component {
 
     setAddBorder = () => {
         this.clearBorders();
-        document.getElementById("add").style.borderBottom = "3px solid burlywood"
+        document.getElementById("add").style.borderBottom = "3px solid aquamarine"
     };
 
     setUpdateBorder = () => {
         this.clearBorders();
-        document.getElementById("update").style.borderBottom = "3px solid burlywood"
+        document.getElementById("update").style.borderBottom = "3px solid aquamarine"
     };
 
     setViewBorder = () => {
         this.clearBorders();
-        document.getElementById("view").style.borderBottom = "3px solid burlywood"
+        document.getElementById("view").style.borderBottom = "3px solid aquamarine"
     };
 
     clearBorders = () => {
@@ -98,15 +98,15 @@ class App extends Component {
                     <div className="row" style={{margin: '0'}}>
 
                         <div id="add" onClick={this.add} className="col-sm-4" style={col}>
-                            Add Customer
+                            Add Item
                         </div>
 
                         <div id="update" onClick={this.update} className="col-sm-4" style={col}>
-                            Update Customer
+                            Update Item
                         </div>
 
                         <div id="view" onClick={this.view} className="col-sm-4" style={col}>
-                            View Customers
+                            View Item
                         </div>
 
                     </div>

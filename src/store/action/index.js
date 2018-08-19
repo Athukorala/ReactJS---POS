@@ -1,22 +1,14 @@
-// backdrop loading actions
+// navbar changes
 
 export  {
 
-    startLoading,
-    stopLoading,
+    customerHandler,
+    itemHandler,
+    placeorderHandler
 
-} from './LoadingBarActions'
+} from './BodyActions'
 
 
-// user image actions ---
-
-export  {
-
-    imageNameHandler,
-    imageSendHandler,
-    saveImageHandler
-
-} from './userImageActions'
 
 
 

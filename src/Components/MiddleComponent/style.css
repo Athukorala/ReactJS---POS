@@ -1,12 +1,13 @@
 .mainDiv{
-    background-color:white;
+    background-color:black;
     /*margin: 10%;*/
     margin-top: 3%;
     width: 75%;
     margin-left: 13%;
+    color:white
 }
 
 
-.mainDiv:hover{
-    color:gray;
-}
+/*.mainDiv:hover{*/
+    /*color:gray;*/
+/*}*/
