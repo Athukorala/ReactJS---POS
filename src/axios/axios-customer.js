@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const instance=axios.create({
-    baseURL:'https://diamot-web.azurewebsites.net/Admin/'
+    baseURL:'http://localhost:8081/api/v1/customers'
 
 });
 

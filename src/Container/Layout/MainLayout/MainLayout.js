@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import Navbar from "../../../Components/MainNavbar/Navbar";
-import Sider from '../../../Components/Siders/CustomerSider';
 import CustomerBody from "../../../Components/MiddleComponent/CustomerBody";
 import ItemBody from "../../../Components/MiddleComponent/ItemBody";
 import {connect} from "react-redux";
@@ -8,10 +7,6 @@ import {connect} from "react-redux";
 
 class App extends Component{
     render(){
-        console.log("Customer: "+this.props.customer);
-        console.log("Item: "+this.props.item);
-        console.log("PlaceOrder: "+this.props.placeorder);
-
         let bodyShow = null;
 
         if(this.props.customer){
