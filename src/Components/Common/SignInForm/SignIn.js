@@ -3,7 +3,7 @@ import Image from '../../../Content/images/image1.jpg';
 
 const antModalStyle = {opacity: '0.3'};
 const documentStyle = {
-    width: '60%',
+    width: '50%',
     transformOrigin: '245px 476px 0px',
     top: '15%',
 
@@ -53,7 +53,6 @@ class SignIn extends Component {
 
         modal = <div>
 
-
             <div tabIndex="-1" style={{zIndex: '10000'}} className="ant-modal-wrap vertical-center-modal" role="dialog">
 
                 <div role="document" className="ant-modal" style={documentStyle}>
@@ -71,10 +70,10 @@ class SignIn extends Component {
                         </button>
                         <div className="ant-modal-body" style={modalBody}>
                             <div className="row">
-                                <div className="col-sm-2">
+                                <div className="col-sm-1">
 
                                 </div>
-                                <div className="col-sm-8">
+                                <div className="col-sm-10">
                                     <img src={Image} width="100%" height="100%" alt="image"/>
                                     <br/><br/>
                                     <center>
@@ -83,7 +82,7 @@ class SignIn extends Component {
                                     </center>
 
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="col-sm-1">
 
                                 </div>
                             </div>
