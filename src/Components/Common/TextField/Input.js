@@ -13,8 +13,10 @@ class App extends Component {
                            width: this.props.width ? this.props.width : '50%',
                            height: this.props.height ? this.props.height : '38px',
                            borderRadius: '20px',
+                           boxShadow:'none'
                        }}
                        disabled={this.props.disabled}
+                       onChange={this.props.onChange}
                 />
             </div>
 

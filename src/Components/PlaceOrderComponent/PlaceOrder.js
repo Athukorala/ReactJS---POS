@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 import Input from "../Common/TextField/Input";
 import Button from "../Common/Button/Button";
-import classes from "../MiddleComponent/style.css";
+import classes from "./style.css";
 
 class App extends Component {
     render() {
         return (
             <div className={classes.mainDiv}>
-                <div style={{marginLeft: '10%', marginTop: '5%'}}>
+                <div style={{borderBottom:'2px solid burlywood',paddingTop: '1%',paddingLeft:'1%'}}>
+                <label htmlFor="exampleFormControlInput1">Place - Order</label>
+                </div>
+                    <div style={{marginLeft: '10%'}}>
                     <div className="row" style={{paddingTop: '3%'}}>
-                        <div className="col-sm-3">
+                        <div className="col-sm-4">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlSelect1">Select Customer Id</label>
                                 <select className="form-control" id="exampleFormControlSelect1"
@@ -86,10 +89,10 @@ class App extends Component {
                             <tr>
                                 {/*----- table row ---*/}
 
-                                <td colSpan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>@twitter</td>
-                                <td>@twitter</td>
+
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
 
                             </tbody>
@@ -107,7 +110,7 @@ class App extends Component {
                         </div>
                         <div className="col-sm-4">
                             <br/>
-                            <Button width="100%" backgroundColor="black" children="Create Order"/>
+                            <Button width="100%"   children="Create Order"/>
                         </div>
                         <div className="col-sm-1">
                         </div>

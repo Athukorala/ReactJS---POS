@@ -8,10 +8,12 @@ class App extends Component {
                         data-toggle={this.props.toggle} data-target={this.props.target} style={{
                     width: this.props.width ? this.props.width : '30%',
                     borderRadius: '25px',
-                    height: this.props.isHeight ? this.props.height : '40px',
+                    height: this.props.height ? this.props.height : '40px',
                     backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#00C853',
-                    borderColor: this.props.backgroundColor ? '#abebab' : '#00C853',
-                    color: this.props.color,
+                    background: this.props.background? this.props.background:'linear-gradient(to left, #ed4264, #ffedbc)',
+                    // borderColor: this.props.backgroundColor ? '#abebab' : '#00C853',
+                    color: this.props.color?this.props.color:'white',
+                    borderColor: this.props.backgroundColor ? '#abebab' : 'white',
                     outline: 'none',
                     marginBottom: '5%'
 
