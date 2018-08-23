@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import Input from "../Common/TextField/Input";
 import Button from "../Common/Button/Button";
 import classes from "./style.css";
+import {DatePicker} from 'antd';
 
 class App extends Component {
     render() {
         return (
             <div className={classes.mainDiv}>
-                <div style={{borderBottom:'2px solid burlywood',paddingTop: '1%',paddingLeft:'1%'}}>
-                <label htmlFor="exampleFormControlInput1">Place - Order</label>
+                <div style={{borderBottom: '2px solid burlywood', paddingTop: '1%', paddingLeft: '1%'}}>
+                    <label htmlFor="exampleFormControlInput1">Place - Order</label>
                 </div>
-                    <div style={{marginLeft: '10%'}}>
+                <div style={{marginLeft: '10%'}}>
                     <div className="row" style={{paddingTop: '3%'}}>
                         <div className="col-sm-4">
                             <div className="form-group">
@@ -32,7 +33,16 @@ class App extends Component {
                                        placeholder="Customer Name"/>
                             </div>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-1">
+
+                        </div>
+                        <div className="col-sm-2">
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlInput1">Select Date</label>
+                                <DatePicker popupStyle={popup} onChange={this.datePicker} style={dark}/>
+                            </div>
+                        </div>
+                        <div className="col-sm-1">
 
                         </div>
                     </div>
@@ -76,7 +86,7 @@ class App extends Component {
                         {/*--- placeorder table --*/}
 
                         <table className="table table-hover"
-                               style={{width: '88%', backgroundColor: 'white', color: 'black',marginLeft:'2%'}}>
+                               style={{width: '88%', backgroundColor: 'white', color: 'black', marginLeft: '2%'}}>
                             <thead>
                             <tr>
 
@@ -105,12 +115,13 @@ class App extends Component {
                         <div className="col-sm-7">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Full Total</label>
-                                <Input disabled="true" width="50%" id="exampleFormControlInput1" placeholder="Full Total"/>
+                                <Input disabled="true" width="50%" id="exampleFormControlInput1"
+                                       placeholder="Full Total"/>
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <br/>
-                            <Button width="100%"   children="Create Order"/>
+                            <Button width="100%" children="Create Order"/>
                         </div>
                         <div className="col-sm-1">
                         </div>
@@ -125,4 +136,13 @@ class App extends Component {
 
 }
 
+const popup = {
+    width: '40px',
+    height: '50px'
+}
+const dark = {
+    opacity: '1',
+    width: '100%'
+
+}
 export default App;

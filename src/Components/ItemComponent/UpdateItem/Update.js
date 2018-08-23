@@ -18,6 +18,12 @@ class App extends Component{
 
     };
 
+    componentDidUpdate(){
+        console.log("Descrtiption: "+this.state.name);
+        console.log("Qty: "+this.state.qty);
+        console.log("Price: "+this.state.price);
+    }
+
     didMountTick = () => {
         axios.get(`items`)
             .then(response => {
@@ -50,30 +56,6 @@ class App extends Component{
 
     };
 
-    isNameBackground = () => {
-        document.getElementById("exampleFormControlInput1").style.background="linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
-
-    noNameBackground = () => {
-        document.getElementById("exampleFormControlInput1").style.background="white";
-    };
-
-    isQtyBackground = () => {
-        document.getElementById("exampleFormControlInput2").style.background="linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
-
-    noQtyBackground = () => {
-        document.getElementById("exampleFormControlInput2").style.background="white";
-    };
-
-    isPriceBackground = () => {
-        document.getElementById("exampleFormControlInput3").style.background="linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
-
-    noPriceBackground = () => {
-        document.getElementById("exampleFormControlInput3").style.background="white";
-    };
-
     submit = () => {
         if(this.state.name.trim() === ''){
             this.isNameBackground();
@@ -81,21 +63,48 @@ class App extends Component{
             this.noNameBackground();
         }
 
-        if(this.state.qty.trim() === ''){
+        if(this.state.qty === ''){
             this.isQtyBackground();
         }else{
             this.noQtyBackground();
         }
 
-        if(this.state.price.trim() === ''){
+        if(this.state.price === ''){
             this.isPriceBackground();
         }else{
             this.noPriceBackground();
         }
 
 
-        if(this.state.name.trim() !== '' && this.state.qty.trim() !== '' && this.state.price.trim() !== '' ){
+        if(this.state.name.trim() !== '' && this.state.qty !== '' && this.state.price !== '' ){
             console.log("correct")
+            let id = document.getElementById("example1").value;
+
+            const itemObj={
+                code: id,
+                description: this.state.name,
+                qty: this.state.qty,
+                unitprice: this.state.price
+            };
+            axios.post(`items/`+id,itemObj)
+                .then(response => {
+
+                    if(response.status === 200){
+                        this.setState({
+                            name: '',
+                            price: '',
+                            qty: ''
+                        });
+                        this.isNameBackground();
+                        this.isQtyBackground();
+                        this.isPriceBackground();
+                        // this.props.stop(true);
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                });
         }
     };
 
@@ -131,6 +140,34 @@ class App extends Component{
             });
     };
 
+    removesubmit = () => {
+
+        let id = document.getElementById("example1").value;
+        console.log(id);
+
+        axios.delete(`items/` + id)
+            .then(response1 => {
+                axios.get(`items`)
+                    .then(response => {
+                        console.log(response.data);
+                        this.setState({
+                            itemDetails: response.data,
+                            name:'',
+                            price:'',
+                            qty:''
+                        });
+                    })
+
+                    .catch(error => {
+                        console.log("error: " + error)
+                    });
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
+    };
+
     render(){
 
         let options = this.state.itemDetails.map((row, index) => (
@@ -142,8 +179,8 @@ class App extends Component{
         return(
             <div style={{ marginLeft: '10%',marginTop:'3%'}}>
                 <div className="form-group">
-                    <label htmlFor="exampleFormControlSelect1">Select Id</label>
-                    <select onChange={(event) => this.idChange(event)} className="form-control" id="exampleFormControlSelect1" style={{width:'30%',borderRadius:'20px'}}>
+                    <label htmlFor="example1">Select Id</label>
+                    <select onChange={(event) => this.idChange(event)} className="form-control" id="example1" style={{background: 'linear-gradient(to right, rgb(219, 230, 246), rgb(197, 121, 109))',width:'30%',borderRadius:'20px'}}>
                         {options}
                     </select>
                 </div>
@@ -153,7 +190,7 @@ class App extends Component{
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput2">Item Qty</label>
-                    <Input value={this.state.qty} onChange={(event)=>this.qtyInput(event.target.value)} id="exampleFormControlInput2" placeholder="Qty"/>
+                    <Input type="number" value={this.state.qty} onChange={(event)=>this.qtyInput(event.target.value)} id="exampleFormControlInput2" placeholder="Qty"/>
                 </div>
 
                 <div className="form-group">
@@ -175,6 +212,32 @@ class App extends Component{
         )
     }
 
+    isNameBackground = () => {
+        document.getElementById("exampleFormControlInput1").style.background="linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noNameBackground = () => {
+        document.getElementById("exampleFormControlInput1").style.background="white";
+    };
+
+    isQtyBackground = () => {
+        document.getElementById("exampleFormControlInput2").style.background="linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noQtyBackground = () => {
+        document.getElementById("exampleFormControlInput2").style.background="white";
+    };
+
+    isPriceBackground = () => {
+        document.getElementById("exampleFormControlInput3").style.background="linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noPriceBackground = () => {
+        document.getElementById("exampleFormControlInput3").style.background="white";
+    };
+
 }
+
+
 
 export default App;

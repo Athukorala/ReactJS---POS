@@ -16,21 +16,7 @@ class App extends Component {
         submit: false
     };
 
-    isNameBackground = () => {
-        document.getElementById("exampleFormControlInput1").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
 
-    noNameBackground = () => {
-        document.getElementById("exampleFormControlInput1").style.background = "white";
-    };
-
-    isAddressBackground = () => {
-        document.getElementById("exampleFormControlInput2").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
-
-    noAddressBackground = () => {
-        document.getElementById("exampleFormControlInput2").style.background = "white";
-    };
 
     submit = () => {
 
@@ -108,6 +94,22 @@ class App extends Component {
 
         )
     }
+
+    isNameBackground = () => {
+        document.getElementById("exampleFormControlInput1").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noNameBackground = () => {
+        document.getElementById("exampleFormControlInput1").style.background = "white";
+    };
+
+    isAddressBackground = () => {
+        document.getElementById("exampleFormControlInput2").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noAddressBackground = () => {
+        document.getElementById("exampleFormControlInput2").style.background = "white";
+    };
 
 }
 

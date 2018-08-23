@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import Image from '../../../Content/images/image1.jpg';
+import Image from '../../../Content/images/ab.jpg';
+import Button from "../Button/Button";
 
-const antModalStyle = {opacity: '0.3'};
+const antModalStyle = {opacity: '1'};
 const documentStyle = {
     width: '50%',
     transformOrigin: '245px 476px 0px',
-    top: '15%',
+    top: '8%',
 
 };
 const liStyle = {
@@ -16,7 +17,8 @@ const liStyle = {
 
 const modalBody = {
     backgroundImage: 'url(../src/Content/images/maxresdefault.jpg)',
-    height: '350px'
+    height: '350px',
+    opacity: 1
 }
 const spanStyle = {border: 'none', outline: 'none'};
 
@@ -54,11 +56,15 @@ class SignIn extends Component {
         modal = <div>
 
             <div tabIndex="-1" style={{zIndex: '10000'}} className="ant-modal-wrap vertical-center-modal" role="dialog">
+               <br/>
+                <center>
+                    <small style={{color:'black',fontSize:'16px'}}>Smarter Shopping, Better Living!</small>
 
+                </center>
                 <div role="document" className="ant-modal" style={documentStyle}>
                     <div style={antModalStyle} onClick={() => this.setModalVisible()}>
                     </div>
-                    <div className="ant-modal-content">
+                    <div className="ant-modal-content" style={{border:'3px solid lightgray'}}>
                         <button
                             aria-label="Close" className="ant-modal-close">
 
@@ -75,11 +81,8 @@ class SignIn extends Component {
                                 </div>
                                 <div className="col-sm-10">
                                     <img src={Image} width="100%" height="100%" alt="image"/>
-                                    <br/><br/>
-                                    <center>
-                                        <small style={{color:'white',fontSize:'14px'}}>Smarter Shopping, Better Living!</small>
 
-                                    </center>
+
 
                                 </div>
                                 <div className="col-sm-1">

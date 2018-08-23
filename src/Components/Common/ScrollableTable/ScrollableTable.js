@@ -21,7 +21,7 @@ class ScrollTable extends Component{
 
         const thead=theadData.map((data,index)=>{
             return(
-                <th key={index} style={{fontWeight:'normal',textAlign:'center'}}><span className="text">{data}</span></th>
+                <th key={index} style={{fontWeight:'bold',textAlign:'center'}}><span className="text">{data}</span></th>
             )
         });
 

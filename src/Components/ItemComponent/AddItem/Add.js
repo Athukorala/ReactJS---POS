@@ -12,30 +12,6 @@ class App extends Component {
         submit: false
     };
 
-    isNameBackground = () => {
-        document.getElementById("exampleFormControlInput1").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
-
-    noNameBackground = () => {
-        document.getElementById("exampleFormControlInput1").style.background = "white";
-    };
-
-    isQtyBackground = () => {
-        document.getElementById("exampleFormControlInput2").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
-
-    noQtyBackground = () => {
-        document.getElementById("exampleFormControlInput2").style.background = "white";
-    };
-
-    isPriceBackground = () => {
-        document.getElementById("exampleFormControlInput3").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
-    };
-
-    noPriceBackground = () => {
-        document.getElementById("exampleFormControlInput3").style.background = "white";
-    };
-
     submit = () => {
         if (this.state.name.trim() === '') {
             this.isNameBackground();
@@ -128,6 +104,30 @@ class App extends Component {
 
         )
     }
+
+    isNameBackground = () => {
+        document.getElementById("exampleFormControlInput1").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noNameBackground = () => {
+        document.getElementById("exampleFormControlInput1").style.background = "white";
+    };
+
+    isQtyBackground = () => {
+        document.getElementById("exampleFormControlInput2").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noQtyBackground = () => {
+        document.getElementById("exampleFormControlInput2").style.background = "white";
+    };
+
+    isPriceBackground = () => {
+        document.getElementById("exampleFormControlInput3").style.background = "linear-gradient(to left, #ba5370, #f4e2d8)";
+    };
+
+    noPriceBackground = () => {
+        document.getElementById("exampleFormControlInput3").style.background = "white";
+    };
 
 }
 

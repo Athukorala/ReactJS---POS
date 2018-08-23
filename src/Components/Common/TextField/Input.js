@@ -9,7 +9,7 @@ class App extends Component {
                        placeholder={this.props.placeholder}
 
                        style={{
-
+                           color: this.props.color ? this.props.color: 'black',
                            width: this.props.width ? this.props.width : '50%',
                            height: this.props.height ? this.props.height : '38px',
                            borderRadius: '20px',
