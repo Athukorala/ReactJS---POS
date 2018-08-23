@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+import * as axiosPublic from './axios-public';
 
 const instance=axios.create({
-    baseURL:'http://localhost:8080/api/v1/items'
+    baseURL:axiosPublic.PUBLIC_URL+'/api/v1/'
 });
 
 instance.defaults.headers.post['Content-Type'] = 'application/json';

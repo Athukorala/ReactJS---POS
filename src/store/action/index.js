@@ -8,6 +8,15 @@ export  {
 
 } from './BodyActions'
 
+// loading bar changes
+
+export  {
+
+    stopLoading,
+    startLoading
+
+} from './LoadinBarActions'
+
 
 
 

@@ -4,6 +4,8 @@ import CustomerBody from "../../../Components/MiddleComponent/CustomerBody";
 import ItemBody from "../../../Components/MiddleComponent/ItemBody";
 import {connect} from "react-redux";
 import PlaceOrder from "../../../Components/PlaceOrderComponent/PlaceOrder";
+import LoadingBar from "../../../Components/Common/LoadingBar/LoadingBar";
+import Footer from "../../../Components/Footer/Footer";
 
 class App extends Component{
     render(){
@@ -20,8 +22,10 @@ class App extends Component{
 
         return(
             <div>
+                <LoadingBar show={this.props.result}/>
                 <Navbar/>
                 {bodyShow}
+                {/*<Footer/>*/}
 
             </div>
         )
@@ -35,6 +39,10 @@ const mapStateToProps = (state) => {
         customer: state.isBodyReducer.customerDashbord,
         item: state.isBodyReducer.itemDashbord,
         placeorder: state.isBodyReducer.placeorderDashbord,
+
+        // loading changes
+
+        result: state.isLoad.start
     }
 };
 

@@ -9,7 +9,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        axios.get()
+        axios.get(`items`)
             .then(response => {
                 console.log(response.data)
                 this.setState({
@@ -33,13 +33,11 @@ class App extends Component {
 
         itemData.map(item => {
                 tbodyData.push({
-                    "id": item.id,
+                    "id": item.code,
                     "description": item.description,
-                    "price": item.price,
-
+                    "qty" : item.qty,
+                    "price": item.unitprice,
                 });
-
-
             }
         );
 

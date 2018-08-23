@@ -13,10 +13,13 @@ class App extends Component {
                            width: this.props.width ? this.props.width : '50%',
                            height: this.props.height ? this.props.height : '38px',
                            borderRadius: '20px',
-                           boxShadow:'none'
+                           boxShadow:'none',
+                           background:'linear-gradient(to right, #dbe6f6, #c5796d)'
                        }}
                        disabled={this.props.disabled}
                        onChange={this.props.onChange}
+                       value={this.props.value}
+                       type={this.props.type}
                 />
             </div>
 

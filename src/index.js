@@ -9,10 +9,12 @@ import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunk from 'redux-thunk';
 
 import bodyReducer from '../src/store/reducer/BodyReducer';
+import loadingReducer from '../src/store/reducer/LoadingBarReducer';
 
 const rootReducer = combineReducers({
 
     isBodyReducer: bodyReducer,
+    isLoad: loadingReducer
 
 });
 

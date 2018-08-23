@@ -9,7 +9,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        axios.get()
+        axios.get(`customers`)
             .then(response => {
                 console.log(response.data)
                 this.setState({

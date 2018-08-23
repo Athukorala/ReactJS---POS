@@ -1,12 +1,50 @@
 import React, {Component} from 'react';
 import Input from "../../Common/TextField/Input";
 import Button from "../../Common/Button/Button";
+import axios from "../../../axios/axios-customer";
 
 class App extends Component {
     state = {
         name: '',
         address: '',
-        submit: false
+        submit: false,
+        customerDetails: []
+    };
+
+    componentDidMount() {
+        this.didMountTick();
+
+    };
+
+    didMountTick = () => {
+        axios.get(`customers`)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    customerDetails: response.data
+                });
+
+                if (response.data.length !== 0) {
+                    axios.get(`customers/` + response.data[0].id)
+                        .then(response => {
+                            console.log(response.data);
+                            this.setState({
+                                name: response.data.name,
+                                address: response.data.address
+                            })
+                        })
+
+                        .catch(error => {
+                            console.log("error: " + error)
+                        });
+                }
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
+
+
     };
 
     isNameBackground = () => {
@@ -39,12 +77,63 @@ class App extends Component {
         }
 
         if (this.state.name.trim() !== '' && this.state.address.trim() !== '') {
-            console.log("correct")
+            let id = document.getElementById("example1").value;
+
+            const customerObj={
+                id:id,
+                name:this.state.name,
+                address:this.state.address
+            };
+            axios.post(`customers/`+id,customerObj)
+                .then(response => {
+
+                    if(response.status === 200){
+                        this.setState({
+                            name: '',
+                            address: ''
+                        });
+                        this.isNameBackground();
+                        this.isAddressBackground();
+                        // this.props.stop(true);
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+
+
         }
     };
 
     removesubmit = () => {
 
+        let id = document.getElementById("example1").value;
+        console.log(id);
+
+        axios.delete(`customers/` + id)
+            .then(response1 => {
+
+                axios.get(`customers`)
+                    .then(response => {
+                        console.log(response.data);
+                        this.setState({
+                            customerDetails: response.data,
+                            name:'',
+                            address:''
+
+                        });
+
+                    })
+
+                    .catch(error => {
+                        console.log("error: " + error)
+                    });
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
     };
 
 
@@ -58,28 +147,54 @@ class App extends Component {
         this.noAddressBackground();
     };
 
+    idChange = (event) => {
+        console.log(event.target.value);
+        axios.get(`customers/` + event.target.value)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    name: response.data.name,
+                    address: response.data.address
+                })
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
+    };
+
     render() {
+
+        let options = this.state.customerDetails.map((row, index) => (
+            <option key={index}>
+                {row.id}
+            </option>
+        ));
+
         return (
             <div style={{marginLeft: '10%', marginTop: '5%'}}>
                 <div className="form-group">
-                    <label htmlFor="exampleFormControlSelect1">Select Id</label>
-                    <select className="form-control" id="exampleFormControlSelect1"
-                            style={{width: '30%', borderRadius: '20px'}}>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <label htmlFor="example1">Select Id</label>
+                    <select onChange={(event) => this.idChange(event)} className="form-control" id="example1"
+                            style={{
+                                width: '30%',
+                                borderRadius: '20px',
+                                background: 'linear-gradient(to right, rgb(219, 230, 246), rgb(197, 121, 109))'
+                            }}>
+                        {options}
+
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput1">Customer name</label>
-                    <Input onChange={(event) => this.nameInput(event.target.value)} id="exampleFormControlInput1"
+                    <Input value={this.state.name} onChange={(event) => this.nameInput(event.target.value)}
+                           id="exampleFormControlInput1"
                            placeholder="Name"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput2">Customer Address</label>
-                    <Input onChange={(event) => this.addressInput(event.target.value)} id="exampleFormControlInput2"
+                    <Input value={this.state.address} onChange={(event) => this.addressInput(event.target.value)}
+                           id="exampleFormControlInput2"
                            placeholder="Address"/>
                 </div>
                 <br/>
@@ -88,7 +203,8 @@ class App extends Component {
                         <Button onClick={this.submit} width="100%" children="Update Customer"/>
                     </div>
                     <div className="col-sm-3">
-                        <Button onClick={this.removesubmit} width="100%" background="linear-gradient(to top, #9796f0, #fbc7d4)"
+                        <Button onClick={this.removesubmit} width="100%"
+                                background="linear-gradient(to top, #9796f0, #fbc7d4)"
                                 children="Remove Customer"/>
                     </div>
 
