@@ -18,7 +18,11 @@ export  {
 } from './LoadinBarActions'
 
 
+export  {
 
+    imageHandler
+
+} from './ImageActions'
 
 
 

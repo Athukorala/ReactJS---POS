@@ -1,8 +1,7 @@
 import React from 'react';
 import Drag from '../../../Content/images/drag.png';
 import connect from "react-redux/es/connect/connect";
-// import classes from './icon.css';
-
+import * as actionCreators from '../../../store/action/index';
 
 const style ={
 
@@ -13,12 +12,7 @@ const style ={
     borderRadius:'6px',
     backgroundColor:'#414141',
     border:'1px solid #7E7E7E'
-    // borderLeft: '1px solid gray',
-    // borderRight: '1px solid gray',
-    // borderTop: '5px solid gray',
-    // borderBottom: '5px solid gray'
-
-}
+};
 
 class ImageUpload extends React.Component {
     constructor(props) {
@@ -39,20 +33,16 @@ class ImageUpload extends React.Component {
         let reader = new FileReader();
         let file = e.target.files[0];
 
-
-
         reader.onloadend = () => {
             this.setState({
                 file: file,
                 imagePreviewUrl: reader.result
             });
-        }
-
+        };
         reader.readAsDataURL(file);
-        // console.log(reader)
-        // console.log(reader.result)
         urlArray.push(reader);
-        // this.props.onImageSendHandler(urlArray);
+        // this.props.imageHandler(urlArray);
+        this.props.imageHandler(file);
     }
 
     render() {
@@ -91,12 +81,6 @@ class ImageUpload extends React.Component {
                                    opacity: '0'
                                }}
                                onChange={(e)=>this._handleImageChange(e)}/>
-
-                        {/*-----------------------------*/}
-
-                        {/*<button className="submitButton"*/}
-                        {/*type="submit"*/}
-                        {/*onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>*/}
                     </form>
                     <div className="imgPreview" style={{
                         textAlign: 'center',
@@ -131,7 +115,7 @@ const mapDispatchToProps=(dispatch)=>{
         // onHandleSizeLimit:(data)=>dispatch(actionCreators.onHandleSizeLimit(data)),
         //
         // //---
-        // onImageSendHandler: (image) => dispatch(actionCreators.imageSendHandler(image))
+        imageHandler: (image) => dispatch(actionCreators.imageHandler(image))
     }
 }
 

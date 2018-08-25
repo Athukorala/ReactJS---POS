@@ -11,10 +11,14 @@ import thunk from 'redux-thunk';
 import bodyReducer from '../src/store/reducer/BodyReducer';
 import loadingReducer from '../src/store/reducer/LoadingBarReducer';
 
+import imageReducer from '../src/store/reducer/ImageReducer';
+
+
 const rootReducer = combineReducers({
 
     isBodyReducer: bodyReducer,
-    isLoad: loadingReducer
+    isLoad: loadingReducer,
+    isImageReducer:imageReducer
 
 });
 

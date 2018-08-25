@@ -1,0 +1,11 @@
+.nav {
+    background: #001529 !important;
+}
+
+.nav a:hover, a:active, a.active, a:focus {
+
+    color: white;
+    border: 1px solid black;
+    transition: 0.3s;
+}
+
