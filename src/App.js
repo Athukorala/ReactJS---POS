@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Eux from "./hoc/Eux/Eux";
 import MainLayout from "./Container/Layout/MainLayout/MainLayout";
-import SignIn from "./Components/Common/SignInForm/SignIn";
+import SignIn from "./Components/SignInForm/SignIn";
 
 
 class App extends Component {

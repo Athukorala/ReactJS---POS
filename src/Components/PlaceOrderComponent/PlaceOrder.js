@@ -3,9 +3,122 @@ import Input from "../Common/TextField/Input";
 import Button from "../Common/Button/Button";
 import classes from "./style.css";
 import {DatePicker} from 'antd';
+import axiosCustomer from "../../axios/axios-customer";
+import axiosItem from "../../axios/axios-item";
+import * as actionCreators from "../../store/action";
+import connect from "react-redux/es/connect/connect";
 
 class App extends Component {
+
+    state={
+        customerDetails:[],
+        itemDetails: [],
+        totalAmount:0,
+
+        // --- for order --
+        orderDate:'',
+
+        //-- customer
+        cusName:'',
+
+        // --items
+        itemDescription:'',
+        itemQty:'',
+        itemPrice:'',   
+
+    };
+
+    componentDidMount(){
+        this.didMountTick();
+    }
+
+    didMountTick = () => {
+         // this.props.start(true);
+
+        // customers get id
+
+        axiosCustomer.get(`customers`)
+            .then(response => {
+                this.setState({
+                    customerDetails: response.data
+                });
+
+                this.props.stop(true);
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
+
+        // items get id
+        axiosItem.get(`items`)
+            .then(response => {
+                this.setState({
+                    itemDetails: response.data
+                });
+
+                this.props.stop(true);
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
+
+    };
+
+    datePicker = (date,stringDate) => {
+        this.setState({
+            orderDate:stringDate
+        })
+    }
+
+    customerIdChange = (event) => {
+        console.log(event.target.value);
+        axiosCustomer.get(`customers/` + event.target.value)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    cusName: response.data.name,
+                    address: response.data.address
+                })
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
+    };
+
+    itemIdChange = (event) => {
+        console.log(event.target.value);
+        axiosItem.get(`items/` + event.target.value)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    itemDescription: response.data.description,
+                    itemPrice: response.data.unitprice,
+                    itemQty: response.data.qty
+                })
+            })
+
+            .catch(error => {
+                console.log("error: " + error)
+            });
+    };
+
     render() {
+
+        let customerOptions = this.state.customerDetails.map((row, index) => (
+            <option key={index}>
+                {row.id}
+            </option>
+        ));
+
+        let itemOptions = this.state.itemDetails.map((row, index) => (
+            <option key={index}>
+                {row.code}
+            </option>
+        ));
+
         return (
             <div className={classes.mainDiv}>
                 <div style={{borderBottom: '2px solid burlywood', paddingTop: '1%', paddingLeft: '1%'}}>
@@ -15,21 +128,19 @@ class App extends Component {
                     <div className="row" style={{paddingTop: '3%'}}>
                         <div className="col-sm-4">
                             <div className="form-group">
-                                <label htmlFor="exampleFormControlSelect1">Select Customer Id</label>
-                                <select className="form-control" id="exampleFormControlSelect1"
+                                <label htmlFor="example1">Select Customer Id</label>
+                                <select onChange={(event) => this.customerIdChange(event)} className="form-control" id="example1"
                                         style={{width: '50%', borderRadius: '20px'}}>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+
+                                    {customerOptions}
+
                                 </select>
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Customer Name</label>
-                                <Input disabled="true" width="100%" id="exampleFormControlInput1"
+                                <Input background="black" color="white" value={this.state.cusName} disabled="true" width="100%" id="exampleFormControlInput1"
                                        placeholder="Customer Name"/>
                             </div>
                         </div>
@@ -52,33 +163,29 @@ class App extends Component {
                         <div className="col-sm-3">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlSelect1">Select Item Id</label>
-                                <select className="form-control" id="exampleFormControlSelect1"
+                                <select onChange={(event) => this.itemIdChange(event)}  className="form-control" id="exampleFormControlSelect1"
                                         style={{width: '50%', borderRadius: '20px'}}>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    {itemOptions}
                                 </select>
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Description</label>
-                                <Input disabled="true" width="100%" id="exampleFormControlInput1"
+                                <Input background="black" color="white"  value={this.state.itemDescription} disabled="true" width="100%" id="exampleFormControlInput1"
                                        placeholder="Description"/>
                             </div>
                         </div>
                         <div className="col-sm-2">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Qty</label>
-                                <Input width="100%" id="exampleFormControlInput1" placeholder="Qty"/>
+                                <Input value={this.state.itemQty} width="100%" id="exampleFormControlInput1" placeholder="Qty"/>
                             </div>
                         </div>
                         <div className="col-sm-2" style={{marginBottom: '3%'}}>
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Price</label>
-                                <Input disabled="true" width="100%" id="exampleFormControlInput1" placeholder="Price"/>
+                                <Input background="black" color="white"  value={this.state.itemPrice} disabled="true" width="100%" id="exampleFormControlInput1" placeholder="Price"/>
                             </div>
                         </div>
 
@@ -115,7 +222,7 @@ class App extends Component {
                         <div className="col-sm-7">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Full Total</label>
-                                <Input disabled="true" width="50%" id="exampleFormControlInput1"
+                                <Input background="black" color="white"  value={this.state.totalAmount} disabled="true" width="50%" id="exampleFormControlInput1"
                                        placeholder="Full Total"/>
                             </div>
                         </div>
@@ -139,10 +246,21 @@ class App extends Component {
 const popup = {
     width: '40px',
     height: '50px'
-}
+};
 const dark = {
     opacity: '1',
     width: '100%'
 
-}
-export default App;
+};
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+        start: (data) => dispatch(actionCreators.startLoading(data)),
+        stop: (data) => dispatch(actionCreators.stopLoading(data)),
+
+    }
+};
+
+export default connect(null, mapDispatchToProps)(App);

@@ -41,7 +41,9 @@
     "react-tooltip": "^3.6.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
-    "thunk": "0.0.1"
+    "socket.io": "^2.1.1",
+    "thunk": "0.0.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.4.1",

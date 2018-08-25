@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Input from '../../Common/TextField/Input';
 import Button from '../../Common/Button/Button';
 import itemAxios from "../../../axios/axios-item";
+import ImageUpload from "../../Common/ImageUpload/ImagUpload";
 
 class App extends Component {
 
@@ -80,24 +81,33 @@ class App extends Component {
     render() {
         return (
             <div style={{marginLeft: '10%', marginTop: '3%'}}>
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlInput1">Item Description</label>
-                    <Input value={this.state.name} onChange={(event) => this.nameInput(event.target.value)} id="exampleFormControlInput1"
-                           placeholder="description"/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlInput2">Item Qty</label>
-                    <Input type="number" value={this.state.qty} onChange={(event) => this.qtyInput(event.target.value)} id="exampleFormControlInput2"
-                           placeholder="Qty"/>
+                <div className="row">
+                    <div className="col-sm-6">
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput1">Item Description</label>
+                            <Input width="100%" value={this.state.name} onChange={(event) => this.nameInput(event.target.value)} id="exampleFormControlInput1"
+                                   placeholder="description"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput2">Item Qty</label>
+                            <Input width="100%" type="number" value={this.state.qty} onChange={(event) => this.qtyInput(event.target.value)} id="exampleFormControlInput2"
+                                   placeholder="Qty"/>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput3">Item Price</label>
+                            <Input type="number" width="100%" value={this.state.price} onChange={(event) => this.priceInput(event.target.value)} id="exampleFormControlInput3"
+                                   placeholder="Price"/>
+                        </div>
+                        <br/>
+                        <Button width="50%" onClick={this.submit} children="Save Item"/>
+
+                    </div>
+                    <div className="col-sm-6">
+                        <ImageUpload/>
+                    </div>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlInput3">Item Price</label>
-                    <Input value={this.state.price} onChange={(event) => this.priceInput(event.target.value)} id="exampleFormControlInput3"
-                           placeholder="Price"/>
-                </div>
-                <br/>
-                <Button onClick={this.submit} children="Save Item"/>
 
 
             </div>

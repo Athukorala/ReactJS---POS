@@ -7,6 +7,7 @@ import * as actionCreators from '../../../store/action/index';
 
 import customerAxios from '../../../axios/axios-customer';
 import {connect} from "react-redux";
+import ImageUpload from "../../Common/ImageUpload/ImagUpload";
 
 class App extends Component {
 
@@ -76,18 +77,27 @@ class App extends Component {
     render() {
         return (
             <div style={{marginLeft: '10%', marginTop: '5%'}}>
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlInput1">Customer name</label>
-                    <Input value={this.state.name} onChange={(event) => this.nameInput(event.target.value)} id="exampleFormControlInput1"
-                           placeholder="Name"/>
+
+                <div className="row">
+                    <div className="col-sm-6">
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput1">Customer name</label>
+                            <Input width="100%" value={this.state.name} onChange={(event) => this.nameInput(event.target.value)} id="exampleFormControlInput1"
+                                   placeholder="Name"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput2">Customer Address</label>
+                            <Input width="100%" value={this.state.address} onChange={(event) => this.addressInput(event.target.value)} id="exampleFormControlInput2"
+                                   placeholder="Address"/>
+                        </div>
+                        <br/>
+                        <Button width="50%" onClick={this.submit} children="Save Customer"/>
+
+                    </div>
+                    <div className="col-sm-6">
+                        <ImageUpload/>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlInput2">Customer Address</label>
-                    <Input value={this.state.address} onChange={(event) => this.addressInput(event.target.value)} id="exampleFormControlInput2"
-                           placeholder="Address"/>
-                </div>
-                <br/>
-                <Button onClick={this.submit} children="Save Customer"/>
 
 
             </div>

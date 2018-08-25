@@ -3,7 +3,7 @@ import classes from './style.css';
 import Add from "../CustomerComponent/AddCustomer/Add";
 import Update from "../CustomerComponent/UpdateCustomer/Update";
 import View from "../CustomerComponent/ViewCustomers/View";
-import SignIn from "../Common/SignInForm/SignIn";
+import SignIn from "../SignInForm/SignIn";
 
 const col = {
     marginTop: '2%',

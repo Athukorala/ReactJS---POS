@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Input from "../../Common/TextField/Input";
 import Button from "../../Common/Button/Button";
 import axios from "../../../axios/axios-customer";
+import * as actionCreators from "../../../store/action";
+import connect from "react-redux/es/connect/connect";
 
 class App extends Component {
     state = {
@@ -17,6 +19,7 @@ class App extends Component {
     };
 
     didMountTick = () => {
+        this.props.start(true);
         axios.get(`customers`)
             .then(response => {
                 console.log(response.data);
@@ -25,6 +28,7 @@ class App extends Component {
                 });
 
                 if (response.data.length !== 0) {
+                    document.getElementById("example1").value=response.data[0].id;
                     axios.get(`customers/` + response.data[0].id)
                         .then(response => {
                             console.log(response.data);
@@ -38,6 +42,7 @@ class App extends Component {
                             console.log("error: " + error)
                         });
                 }
+                this.props.stop(true);
             })
 
             .catch(error => {
@@ -48,6 +53,7 @@ class App extends Component {
     };
 
     submit = () => {
+        this.props.start(true);
         if (this.state.name.trim() === '') {
             this.isNameBackground();
         } else {
@@ -72,13 +78,8 @@ class App extends Component {
                 .then(response => {
 
                     if(response.status === 200){
-                        this.setState({
-                            name: '',
-                            address: ''
-                        });
-                        this.isNameBackground();
-                        this.isAddressBackground();
-                        // this.props.stop(true);
+                        this.didMountTick();
+                        this.props.stop(true);
                     }
 
                 })
@@ -91,28 +92,14 @@ class App extends Component {
     };
 
     removesubmit = () => {
-
+        this.props.start(true);
         let id = document.getElementById("example1").value;
         console.log(id);
 
         axios.delete(`customers/` + id)
             .then(response1 => {
 
-                axios.get(`customers`)
-                    .then(response => {
-                        console.log(response.data);
-                        this.setState({
-                            customerDetails: response.data,
-                            name:'',
-                            address:''
-
-                        });
-
-                    })
-
-                    .catch(error => {
-                        console.log("error: " + error)
-                    });
+                this.didMountTick()
             })
 
             .catch(error => {
@@ -218,4 +205,13 @@ class App extends Component {
 
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+        start: (data) => dispatch(actionCreators.startLoading(data)),
+        stop: (data) => dispatch(actionCreators.stopLoading(data)),
+
+    }
+};
+
+export default connect(null,mapDispatchToProps)(App);

@@ -13,14 +13,14 @@ class App extends Component {
                             borderRadius: '25px',
                             height: this.props.height ? this.props.height : '40px',
                             // backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#00C853',
-                            background: this.props.background ? this.props.background : 'linear-gradient(to left, #ed4264, #ffedbc)',
+                            background: this.props.background ? this.props.background : 'linear-gradient(to right, #3e5151, #decba4)',
                             // borderColor: this.props.backgroundColor ? '#abebab' : '#00C853',
                             color: this.props.color ? this.props.color : 'white',
                             borderColor: this.props.backgroundColor ? '#abebab' : 'white',
                             outline: 'none',
                             marginBottom: '5%',
                             ":hover": {
-                                background: 'linear-gradient(to right, #3e5151, #decba4)'
+                                background: 'linear-gradient(to left, #ed4264, #ffedbc)'
                             }
 
                         }} disabled={this.props.disabled}>{this.props.children}</button>

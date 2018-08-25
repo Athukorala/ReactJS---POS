@@ -5,7 +5,7 @@ import ItemBody from "../../../Components/MiddleComponent/ItemBody";
 import {connect} from "react-redux";
 import PlaceOrder from "../../../Components/PlaceOrderComponent/PlaceOrder";
 import LoadingBar from "../../../Components/Common/LoadingBar/LoadingBar";
-import Footer from "../../../Components/Footer/Footer";
+import Footer from "../../../Components/Common/Footer/Footer";
 
 class App extends Component{
     render(){
@@ -25,7 +25,7 @@ class App extends Component{
                 <LoadingBar show={this.props.result}/>
                 <Navbar/>
                 {bodyShow}
-                {/*<Footer/>*/}
+                <Footer/>
 
             </div>
         )

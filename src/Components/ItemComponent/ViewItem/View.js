@@ -82,7 +82,7 @@ const theadStyle = {
     borderBottom: '1px solid lightgray',
     display: 'flex',
     alignItems: 'center',
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     overflow: 'hidden',
     height: '65px',
     color: 'black'
@@ -98,7 +98,7 @@ const containerStyle = {width: '100%', marginBottom: '3%'};
 
 const trStyle = {
     color: 'black',
-    fontWeight: 'bold'
+    fontWeight: 'noramal'
 }
 
 export default App;

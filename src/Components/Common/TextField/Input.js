@@ -14,7 +14,7 @@ class App extends Component {
                            height: this.props.height ? this.props.height : '38px',
                            borderRadius: '20px',
                            boxShadow:'none',
-                           background:'linear-gradient(to right, #dbe6f6, #c5796d)'
+                           background:this.props.background?this.props.background:'linear-gradient(to right, #dbe6f6, #c5796d)'
                        }}
                        disabled={this.props.disabled}
                        onChange={this.props.onChange}
