@@ -14,6 +14,10 @@ public class CustomerDTO {
         this.address = address;
     }
 
+    public CustomerDTO(int id) {
+        this.id = id;
+    }
+
     public CustomerDTO(String name, String address) {
 
         this.name = name;

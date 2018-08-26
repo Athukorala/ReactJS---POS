@@ -42,8 +42,12 @@ class SignIn extends Component {
 
             <div tabIndex="-1" style={{zIndex: '10000'}} className="ant-modal-wrap vertical-center-modal" role="dialog">
                <br/>
+
                 <center>
-                    <small style={{color:'black',fontSize:'16px'}}>Smarter Shopping, Better Living!</small>
+                    <small style={{color:'black',fontSize:'16px',fontFamily:'cursive'}}>Smarter Shopping, Better Living!</small>
+                    <br/>
+                    <img src="http://www.pos-ks.com/wp-content/uploads/2017/10/pos_logo_square_blue.png" alt="user" style={{width:'10%'}}/>
+                    {/*<p style={{color:'brown',fontSize:'16px'}}> මේක මගේ කඩේ 😂</p>*/}
 
                 </center>
                 <div role="document" className="ant-modal" style={documentStyle}>

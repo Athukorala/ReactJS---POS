@@ -66,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerDTO> findCustomersLike(String name) {
         List<Customer> allCustomers =  repository.letsFindSomeCustomers(name + "%");
         List<CustomerDTO> dtos = new ArrayList<>();
-//        allCustomers.forEach(c -> dtos.add(new CustomerDTO(c.getId(), c.getName(), c.getAddress())));
+        allCustomers.forEach(c -> dtos.add(new CustomerDTO(c.getId(), c.getName(), c.getAddress())));
         return dtos;
     }
 

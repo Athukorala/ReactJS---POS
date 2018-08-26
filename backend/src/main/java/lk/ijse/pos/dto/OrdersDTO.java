@@ -15,12 +15,12 @@ public class OrdersDTO {
     public OrdersDTO() {
     }
 
-    public OrdersDTO(int oid, String date, double fullprice) {
-        this.oid = oid;
-        this.date = date;
-        this.fullprice = fullprice;
-
-    }
+//    public OrdersDTO(int oid, String date, double fullprice) {
+//        this.oid = oid;
+//        this.date = date;
+//        this.fullprice = fullprice;
+//
+//    }
 
     public OrdersDTO(int oid, String date, double fullprice, CustomerDTO customerDTO, List<ItemDTO> itemList) {
         this.oid = oid;
@@ -54,12 +54,30 @@ public class OrdersDTO {
         this.fullprice = fullprice;
     }
 
+    public CustomerDTO getCustomerDTO() {
+        return customerDTO;
+    }
+
+    public void setCustomerDTO(CustomerDTO customerDTO) {
+        this.customerDTO = customerDTO;
+    }
+
+    public List<ItemDTO> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<ItemDTO> itemList) {
+        this.itemList = itemList;
+    }
+
     @Override
     public String toString() {
         return "OrdersDTO{" +
                 "oid=" + oid +
                 ", date='" + date + '\'' +
                 ", fullprice=" + fullprice +
+                ", customerDTO=" + customerDTO +
+                ", itemList=" + itemList +
                 '}';
     }
 }

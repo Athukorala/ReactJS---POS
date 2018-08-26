@@ -75,7 +75,7 @@ class App extends Component {
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <a style={{color:'gray',width:'10%',textAlign:'center',border:'1px solid'}} className="navbar-brand">
                         {/*මේක මගේ කඩේ*/}
-                        <img src={icon} alt="Icon" style={{width:'20%',height:'2%'}}/>
+                        <img src="http://www.pos-ks.com/wp-content/uploads/2017/10/pos_logo_square_blue.png" alt="user" style={{width:'50%'}}/>
                     </a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

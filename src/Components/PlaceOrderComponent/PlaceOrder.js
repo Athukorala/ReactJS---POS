@@ -5,6 +5,7 @@ import classes from "./style.css";
 import {DatePicker} from 'antd';
 import axiosCustomer from "../../axios/axios-customer";
 import axiosItem from "../../axios/axios-item";
+import axios from "../../axios/axios-order";
 import * as actionCreators from "../../store/action";
 import connect from "react-redux/es/connect/connect";
 
@@ -65,7 +66,6 @@ class App extends Component {
                             console.log(response.data);
                             this.setState({
                                 cusName: response.data.name,
-
                             })
                         })
 
@@ -92,12 +92,17 @@ class App extends Component {
                     axiosItem.get(`items/` + response.data[0].code)
                         .then(response => {
                             console.log(response.data);
+
+
                             this.setState({
                                 itemDescription: response.data.description,
                                 itemPrice: response.data.unitprice,
+
                                 itemQty: response.data.qty,
                                 enterQty: response.data.qty,
-                            })
+                            });
+
+
                         })
 
                         .catch(error => {
@@ -121,7 +126,6 @@ class App extends Component {
     };
 
     customerIdChange = (event) => {
-        console.log(event.target.value);
         axiosCustomer.get(`customers/` + event.target.value)
             .then(response => {
                 console.log(response.data);
@@ -136,30 +140,31 @@ class App extends Component {
     };
 
     itemIdChange = (event) => {
-        let key=event.target.value;
-        // console.log("event.target.value: "+event.target.value);
+        let key = event.target.value;
         axiosItem.get(`items/` + key)
             .then(response => {
 
-                let inputQty=0;
-                let reallQty=0;
-                let letNewQty=0;
+                let inputQty = 0;
+                let reallQty = 0;
+                let letNewQty = 0;
 
-                let valid=false;
+                let valid = false;
+                // item qty handling
 
-                if(this.state.tableValue.length !== 0){
+                if (this.state.tableValue.length !== 0) {
                     this.state.tableValue.map((row, index) => {
 
                         // console.log("input key key: "+key)
                         // console.log("check key: "+row.code)
-                        if(key === row.code){
-                            valid=true;
-                            inputQty=row.qty;
-                            reallQty=response.data.qty;
-                            letNewQty=reallQty-inputQty;
+                        if (key === row.code) {
+                            valid = true;
+                            inputQty = row.qty;
+                            reallQty = response.data.qty;
+                            letNewQty = reallQty - inputQty;
 
                             this.setState({
-
+                                itemDescription: response.data.description,
+                                itemPrice: response.data.unitprice,
                                 itemQty: letNewQty,
                                 enterQty: letNewQty,
                             });
@@ -170,7 +175,7 @@ class App extends Component {
 
                 }
 
-                if(!valid){
+                if (!valid) {
                     this.setState({
                         itemDescription: response.data.description,
                         itemPrice: response.data.unitprice,
@@ -197,43 +202,175 @@ class App extends Component {
     };
 
     moveTable = () => {
-        let count = 0;
 
-        const array = this.state.tableValue;
-        console.log(this.state.tableValue);
-        let obj = null;
+        if (this.state.enterQty <= 0) {
+            alert("(-) value not valid qty");
+            this.setState({
+                enterQty: this.state.itemQty,
+            })
+        } else {
+            let count = 0;
 
-        if (this.state.itemQty >= this.state.enterQty) {
-            let itemCode = document.getElementById("itemKeyGen").value;
-            let description = this.state.itemDescription;
-            let itemQty = this.state.enterQty;
+            const array = this.state.tableValue;
+            console.log(this.state.tableValue);
+            let obj = null;
 
-            //amount
-            let inPrice = this.state.itemPrice;
-            let price = this.state.enterQty * this.state.itemPrice;
+            if (this.state.itemQty >= this.state.enterQty) {
 
-            obj = {
-                "code": itemCode, "description": description, "qty": itemQty, "amount": price
+                let itemCode = document.getElementById("itemKeyGen").value;
+                let description = this.state.itemDescription;
+                let itemQty = this.state.enterQty;
+                let price = this.state.enterQty * this.state.itemPrice;
+
+
+                if (this.state.tableValue.length !== 0) {
+                    this.state.tableValue.map((row, index) => {
+                            if (document.getElementById("itemKeyGen").value === row.code) {
+
+                                let onePrice = row.amount / row.qty;
+
+                                let one= parseInt(row.qty);
+                                let two= parseInt(this.state.enterQty);
+
+                                let allQty = one + two;
+                                console.log(this.state.enterQty);
+
+                                itemQty= allQty;
+
+                                price = onePrice*allQty;
+                                // console.log("Qty: "+allQty)
+                                // console.log("Full amount: "+price)
+
+                                const array = this.state.tableValue;
+                                array.splice(index, 1);
+
+                            }
+
+                        }
+                    )
+                }
+
+                //amount
+
+                //--------------
+                let oldQty = this.state.itemQty;
+                let enterQty = this.state.enterQty;
+                let realQty = oldQty - enterQty;
+
+                this.setState({
+                    itemQty: realQty,
+                    enterQty: realQty,
+                });
+                //--------------------
+
+                obj = {
+                    "code": itemCode, "description": description, "qty": itemQty, "amount": price
+                };
+
+                array.push(obj);
+
+                this.setState({
+                        tableValue: array
+                    }
+                )
+
+
+            } else {
+                alert("Invalid qty");
+                this.setState({
+                    itemQty: this.state.itemQty,
+                    enterQty: this.state.itemQty,
+                });
+            }
+
+            // calculate price
+
+            if (this.state.tableValue.length !== 0) {
+
+                this.state.tableValue.map((row, index) => (
+                    count = count + row.amount
+                ));
+                this.setState({
+                    totalAmount: count
+                })
+            } else {
+                this.setState({
+                    totalAmount: 0
+                })
+            }
+        }
+    };
+
+    submit = () => {
+
+        if (this.state.orderDate === '' || this.state.totalAmount === 0 || this.state.cusName === '') {
+            alert("Please fill all inputs..")
+        } else {
+            this.props.start(true);
+            const oderObj={
+                "oid":0,
+                "date":this.state.orderDate,
+                "fullprice":this.state.totalAmount,
+
+                "customerDTO":{
+                    "id":document.getElementById("example1").value
+                },
+                "itemList":this.state.tableValue
             };
 
-            array.push(obj);
+            axios.post(`orders`,oderObj)
 
-            this.setState({
+                .then(response => {
+                    this.props.stop(true);
+                    if(response.status === 200){
+                        this.setState({
+                            orderDate:0,
+                            totalAmount:0,
+                            tableValue:[]
+                        })
 
-                    tableValue: array
-                }
-            )
 
-        } else {
-            alert("Invalid qty")
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+
+                // console.log("Sending backend ............");
+                // console.log("OrderDate: "+this.state.orderDate);
+                // console.log("Customer Id: "+document.getElementById("example1").value);
+                // console.log(this.state.tableValue);
+                // console.log("Total amount: "+this.state.totalAmount);
+                // console.log("...........................");
         }
 
+
+        this.didMountTick();
+    };
+
+    removeItem = (index) => {
+
+        const array = this.state.tableValue;
+        array.splice(index, 1);
+
+        this.setState({
+                tableValue: array
+            }
+        );
+
+        this.calculatePrice();
+
+    };
+
+    calculatePrice = () => {
+        let count = 0;
         // calculate price
 
         if (this.state.tableValue.length !== 0) {
 
             this.state.tableValue.map((row, index) => (
-                count = count+row.amount
+                count = count + row.amount
             ));
             this.setState({
                 totalAmount: count
@@ -243,18 +380,7 @@ class App extends Component {
                 totalAmount: 0
             })
         }
-
-    };
-
-    submit = () => {
-        console.log("clikc")
-        if(this.state.orderDate === '' || this.state.totalAmount === 0 || this.state.cusName === ''){
-            alert("Please fill all inputs..")
-        }else{
-            console.log("valid")
-
-        }
-    };
+    }
 
     render() {
 
@@ -274,6 +400,12 @@ class App extends Component {
                     </td>
                     <td>
                         {row.amount}
+                    </td>
+                    <td>
+                        <button onClick={(data) => this.removeItem(index)} type="button"
+                                className="btn btn-outline-danger btn-sm" style={{boxShadow: 'none', width: '75%'}}>
+                            ✗ Remove
+                        </button>
                     </td>
                 </tr>
             ));
@@ -371,8 +503,9 @@ class App extends Component {
                         </div>
 
                         <div onClick={this.moveTable} className="col-sm-1">
-                            <i style={fontawesomStyle} className="fa fa-sign-in" aria-hidden="true">
-                            </i>
+                            <p style={fontawesomStyle}>👈</p>
+                            {/*<i style={fontawesomStyle} className="fa fa-sign-in" aria-hidden="true">*/}
+                            {/*</i>*/}
                         </div>
 
                         {/*--- placeorder table --*/}
@@ -387,7 +520,7 @@ class App extends Component {
                                 <th scope="col">Amount</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table">
 
                             {/*----- table row ---*/}
 
@@ -427,9 +560,11 @@ class App extends Component {
 }
 
 const fontawesomStyle = {
-    marginTop: '75%',
-    fontSize: '200%',
-    transform: 'rotate(30deg)',
+    // marginTop: '75%',
+    // fontSize: '200%',
+    marginTop: '15%',
+    fontSize: '290%',
+    transform: 'rotate(-26deg)',
     color: 'bisque',
     cursor: 'pointer'
 }
