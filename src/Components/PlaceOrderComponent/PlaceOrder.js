@@ -8,6 +8,8 @@ import axiosItem from "../../axios/axios-item";
 import * as actionCreators from "../../store/action";
 import connect from "react-redux/es/connect/connect";
 
+let totalPrice = 0
+
 class App extends Component {
 
     state = {
@@ -26,7 +28,18 @@ class App extends Component {
         itemQty: '',
         itemPrice: '',
 
-        enterQty:'',
+        enterQty: '',
+
+        // place order table
+
+        tableValue: [
+            // {
+            //     "code": 1, "description": "abc", "qty": 3, "amount": 340
+            // },
+            // {
+            //     "code": 2, "description": "xyz", "qty": 21, "amount": 120
+            // }
+        ]
 
     };
 
@@ -123,17 +136,53 @@ class App extends Component {
     };
 
     itemIdChange = (event) => {
-        console.log(event.target.value);
-        axiosItem.get(`items/` + event.target.value)
+        let key=event.target.value;
+        // console.log("event.target.value: "+event.target.value);
+        axiosItem.get(`items/` + key)
             .then(response => {
-                console.log(response.data);
-                this.setState({
-                    itemDescription: response.data.description,
-                    itemPrice: response.data.unitprice,
-                    itemQty: response.data.qty,
 
-                    enterQty: response.data.qty,
-                })
+                let inputQty=0;
+                let reallQty=0;
+                let letNewQty=0;
+
+                let valid=false;
+
+                if(this.state.tableValue.length !== 0){
+                    this.state.tableValue.map((row, index) => {
+
+                        // console.log("input key key: "+key)
+                        // console.log("check key: "+row.code)
+                        if(key === row.code){
+                            valid=true;
+                            inputQty=row.qty;
+                            reallQty=response.data.qty;
+                            letNewQty=reallQty-inputQty;
+
+                            this.setState({
+
+                                itemQty: letNewQty,
+                                enterQty: letNewQty,
+                            });
+                            this.forceUpdate();
+
+                        }
+                    });
+
+                }
+
+                if(!valid){
+                    this.setState({
+                        itemDescription: response.data.description,
+                        itemPrice: response.data.unitprice,
+
+                        itemQty: response.data.qty, // qty handling
+                        enterQty: response.data.qty,
+                    });
+
+                    this.forceUpdate();
+                }
+
+
             })
 
             .catch(error => {
@@ -142,22 +191,93 @@ class App extends Component {
     };
 
     qtyOnchange = (event) => {
-            this.setState({
-                enterQty:event
-            })
-    }
+        this.setState({
+            enterQty: event
+        })
+    };
 
     moveTable = () => {
-        console.log(this.state.itemQty)
-        console.log(this.state.enterQty)
-        if(this.state.itemQty >=  this.state.enterQty){
-            alert("valid qty");
-        }else{
+        let count = 0;
+
+        const array = this.state.tableValue;
+        console.log(this.state.tableValue);
+        let obj = null;
+
+        if (this.state.itemQty >= this.state.enterQty) {
+            let itemCode = document.getElementById("itemKeyGen").value;
+            let description = this.state.itemDescription;
+            let itemQty = this.state.enterQty;
+
+            //amount
+            let inPrice = this.state.itemPrice;
+            let price = this.state.enterQty * this.state.itemPrice;
+
+            obj = {
+                "code": itemCode, "description": description, "qty": itemQty, "amount": price
+            };
+
+            array.push(obj);
+
+            this.setState({
+
+                    tableValue: array
+                }
+            )
+
+        } else {
             alert("Invalid qty")
         }
-    }
+
+        // calculate price
+
+        if (this.state.tableValue.length !== 0) {
+
+            this.state.tableValue.map((row, index) => (
+                count = count+row.amount
+            ));
+            this.setState({
+                totalAmount: count
+            })
+        } else {
+            this.setState({
+                totalAmount: 0
+            })
+        }
+
+    };
+
+    submit = () => {
+        console.log("clikc")
+        if(this.state.orderDate === '' || this.state.totalAmount === 0 || this.state.cusName === ''){
+            alert("Please fill all inputs..")
+        }else{
+            console.log("valid")
+
+        }
+    };
 
     render() {
+
+        // console.log(this.state.tableValue)
+        let tableBody = null;
+        if (this.state.tableValue !== 0) {
+            tableBody = this.state.tableValue.map((row, index) => (
+                <tr key={index}>
+                    <td>
+                        {row.code}
+                    </td>
+                    <td>
+                        {row.description}
+                    </td>
+                    <td>
+                        {row.qty}
+                    </td>
+                    <td>
+                        {row.amount}
+                    </td>
+                </tr>
+            ));
+        }
 
         let customerOptions = this.state.customerDetails.map((row, index) => (
             <option key={index}>
@@ -170,6 +290,7 @@ class App extends Component {
                 {row.code}
             </option>
         ));
+
 
         return (
             <div className={classes.mainDiv}>
@@ -216,9 +337,9 @@ class App extends Component {
                     <div className="row" style={{paddingTop: '3%'}}>
                         <div className="col-sm-2">
                             <div className="form-group">
-                                <label htmlFor="exampleFormControlSelect1">Select Item Id</label>
+                                <label htmlFor="itemKeyGen">Select Item Id</label>
                                 <select onChange={(event) => this.itemIdChange(event)} className="form-control"
-                                        id="exampleFormControlSelect1"
+                                        id="itemKeyGen"
                                         style={{width: '100%', borderRadius: '20px'}}>
                                     {itemOptions}
                                 </select>
@@ -226,24 +347,26 @@ class App extends Component {
                         </div>
                         <div className="col-sm-4">
                             <div className="form-group">
-                                <label htmlFor="exampleFormControlInput1">Description</label>
-                                <Input background="black" color="white" value={this.state.itemDescription}
-                                       disabled="true" width="100%" id="exampleFormControlInput1"
+                                <label htmlFor="itemDes">Description</label>
+                                <Input id="itemDes" background="black" color="white" value={this.state.itemDescription}
+                                       disabled="true" width="100%"
                                        placeholder="Description"/>
                             </div>
                         </div>
                         <div className="col-sm-2">
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlInput1">Qty</label>
-                                <Input onChange={(event) => this.qtyOnchange(event.target.value)} value={this.state.enterQty} width="100%" id="exampleFormControlInput1"
+                                <Input onChange={(event) => this.qtyOnchange(event.target.value)}
+                                       value={this.state.enterQty} width="100%" id="exampleFormControlInput1"
                                        placeholder="Qty"/>
                             </div>
                         </div>
                         <div className="col-sm-2" style={{marginBottom: '3%'}}>
                             <div className="form-group">
-                                <label htmlFor="exampleFormControlInput1">Price</label>
-                                <Input background="black" color="white" value={this.state.itemPrice} disabled="true"
-                                       width="100%" id="exampleFormControlInput1" placeholder="Price"/>
+                                <label htmlFor="itemPrice">Price</label>
+                                <Input id="itemPrice" background="black" color="white" value={this.state.itemPrice}
+                                       disabled="true"
+                                       width="100%" placeholder="Price"/>
                             </div>
                         </div>
 
@@ -258,21 +381,18 @@ class App extends Component {
                                style={{width: '88%', backgroundColor: 'white', color: 'black', marginLeft: '2%'}}>
                             <thead>
                             <tr>
-
+                                <th scope="col">Code</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Qty</th>
                                 <th scope="col">Amount</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                {/*----- table row ---*/}
 
+                            {/*----- table row ---*/}
 
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            {tableBody}
+
 
                             </tbody>
                         </table>
@@ -291,7 +411,7 @@ class App extends Component {
                         </div>
                         <div className="col-sm-4">
                             <br/>
-                            <Button width="100%" children="Create Order"/>
+                            <Button onClick={this.submit} width="100%" children="Create Order"/>
                         </div>
                         <div className="col-sm-1">
                         </div>
@@ -305,12 +425,13 @@ class App extends Component {
     }
 
 }
-const fontawesomStyle={
-    marginTop:'75%',
-    fontSize:'200%',
+
+const fontawesomStyle = {
+    marginTop: '75%',
+    fontSize: '200%',
     transform: 'rotate(30deg)',
-    color:'bisque',
-    cursor:'pointer'
+    color: 'bisque',
+    cursor: 'pointer'
 }
 
 const popup = {
