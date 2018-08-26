@@ -14,6 +14,9 @@ public class Customer {
 
     public Customer() {
     }
+    public Customer(int id) {
+        this.setId(id);
+    }
 
     public Customer(int id, String name, String address) {
         this.setId(id);

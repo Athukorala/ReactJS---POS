@@ -35,10 +35,10 @@ class App extends Component {
 
         tableValue: [
             // {
-            //     "code": 1, "description": "abc", "qty": 3, "amount": 340
+            //     "code": 1, "description": "abc", "qty": 3, "unitprice": 340
             // },
             // {
-            //     "code": 2, "description": "xyz", "qty": 21, "amount": 120
+            //     "code": 2, "description": "xyz", "qty": 21, "unitprice": 120
             // }
         ]
 
@@ -227,7 +227,7 @@ class App extends Component {
                     this.state.tableValue.map((row, index) => {
                             if (document.getElementById("itemKeyGen").value === row.code) {
 
-                                let onePrice = row.amount / row.qty;
+                                let onePrice = row.unitprice / row.qty;
 
                                 let one= parseInt(row.qty);
                                 let two= parseInt(this.state.enterQty);
@@ -239,7 +239,7 @@ class App extends Component {
 
                                 price = onePrice*allQty;
                                 // console.log("Qty: "+allQty)
-                                // console.log("Full amount: "+price)
+                                // console.log("Full unitprice: "+price)
 
                                 const array = this.state.tableValue;
                                 array.splice(index, 1);
@@ -250,7 +250,7 @@ class App extends Component {
                     )
                 }
 
-                //amount
+                //unitprice
 
                 //--------------
                 let oldQty = this.state.itemQty;
@@ -264,7 +264,7 @@ class App extends Component {
                 //--------------------
 
                 obj = {
-                    "code": itemCode, "description": description, "qty": itemQty, "amount": price
+                    "code": itemCode, "description": description, "qty": itemQty, "unitprice": price
                 };
 
                 array.push(obj);
@@ -288,7 +288,7 @@ class App extends Component {
             if (this.state.tableValue.length !== 0) {
 
                 this.state.tableValue.map((row, index) => (
-                    count = count + row.amount
+                    count = count + row.unitprice
                 ));
                 this.setState({
                     totalAmount: count
@@ -341,7 +341,7 @@ class App extends Component {
                 // console.log("OrderDate: "+this.state.orderDate);
                 // console.log("Customer Id: "+document.getElementById("example1").value);
                 // console.log(this.state.tableValue);
-                // console.log("Total amount: "+this.state.totalAmount);
+                // console.log("Total unitprice: "+this.state.totalAmount);
                 // console.log("...........................");
         }
 
@@ -370,7 +370,7 @@ class App extends Component {
         if (this.state.tableValue.length !== 0) {
 
             this.state.tableValue.map((row, index) => (
-                count = count + row.amount
+                count = count + row.unitprice
             ));
             this.setState({
                 totalAmount: count
@@ -399,7 +399,7 @@ class App extends Component {
                         {row.qty}
                     </td>
                     <td>
-                        {row.amount}
+                        {row.unitprice}
                     </td>
                     <td>
                         <button onClick={(data) => this.removeItem(index)} type="button"

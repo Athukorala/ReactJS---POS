@@ -69,8 +69,8 @@ class App extends Component {
 
         return (
             <div className={classes.nav} style={{
-                backgroundColor:'#001529',width:'100%',zIndex:'10',borderBottom:'1px solid  rgb(255, 237, 188'
-                // position:'fixed'
+                backgroundColor:'#001529',width:'100%',zIndex:'10',borderBottom:'1px solid  rgb(255, 237, 188',
+                position:'fixed',marginTop:'-7%'
             }}>
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <a style={{color:'gray',width:'10%',textAlign:'center',border:'1px solid'}} className="navbar-brand">

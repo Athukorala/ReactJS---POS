@@ -24,11 +24,14 @@ public class Orders {
         this.fullprice = fullprice;
     }
 
-    public Orders(String date, double fullprice, Customer customer) {
+    public Orders(int id,String date, double fullprice, Customer customer) {
+        this.oid=id;
         this.date = date;
         this.fullprice = fullprice;
         this.customer = customer;
     }
+
+
 
     public int getOid() {
         return oid;
