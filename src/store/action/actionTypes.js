@@ -3,6 +3,7 @@
 export const CUSTOMER_MANGAGE = 'CUSTOMER_MANGAGE';
 export const ITEM_MANAGE = 'ITEM_MANAGE';
 export const PLACEORDER_MANAGE = 'PLACEORDER_MANAGE';
+export const ORDER_MANAGE = 'ORDER_MANAGE';
 
 // loading bar ---
 

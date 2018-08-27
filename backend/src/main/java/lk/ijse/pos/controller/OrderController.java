@@ -22,5 +22,27 @@ public class OrderController {
         service.saveOrder(ordersDTO);
     }
 
+    @GetMapping
+    public Long getOrderCount(){
+
+        return service.getOrderCount()+1;
+    }
+
+    @GetMapping("/getFullCount")
+    public Long getOrderFullyCount(){
+        return service.getOrderCount();
+    }
+
+    @GetMapping("/getAll")
+    public Object getAll(){
+
+        return service.getAll();
+    }
+
+
+    @GetMapping("/ab")
+    public Object ab(){
+        return service.getAB();
+    }
 
 }

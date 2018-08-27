@@ -13,4 +13,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     @Query("SELECT c FROM Customer c WHERE c.name LIKE ?#{[0]}")
 //    List<Customer> letsFindSomeCustomers(@Param("customerId") String name);
     List<Customer> letsFindSomeCustomers(String name);
+
+//    @Query("SELECT oid from orders")
+//    Lisr<Integer>
 }

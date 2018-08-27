@@ -4,12 +4,14 @@ import * as actionCreators from "../../store/action/BodyActions";
 import connect from "react-redux/es/connect/connect";
 import customerAxios from "../../axios/axios-customer";
 import itemAxios from "../../axios/axios-item";
-import icon from '../../Content/images/ab.png';
+import axios from "../../axios/axios-order";
+// import icon from '../../Content/images/ab.png';
 
 class App extends Component {
     state = {
         customerDetails: [],
-        itemDetails: []
+        itemDetails: [],
+        count:0
     };
 
     componentDidMount(){
@@ -18,6 +20,7 @@ class App extends Component {
         this.cus();
 
     };
+
 
     tick = () => {
         customerAxios.get(`customers`)
@@ -43,6 +46,17 @@ class App extends Component {
             .catch(error => {
                 console.log("error: " + error)
             });
+
+        axios.get(`orders/getFullCount`)
+            .then(response => {
+                this.setState({
+                    count:response.data
+                })
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
 
     cus = () => {
@@ -61,6 +75,12 @@ class App extends Component {
         this.hideColor();
         document.getElementById("placeNav").style.color=" rgb(255, 237, 188";
         this.props.placeorderBodyHandler(true);
+    }
+
+    order = () => {
+        this.hideColor();
+        document.getElementById("orderNav").style.color=" rgb(255, 237, 188";
+        this.props.orderBodyHandler(true);
     }
 
     render() {
@@ -104,29 +124,45 @@ class App extends Component {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a id="orderNav" style={aStyle} className="nav-link">
+                                <a id="orderNav" onClick={this.order} style={aStyle} className="nav-link">
                                     ORDERS
                                 </a>
                             </li>
+
+
 
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                             <ul className="navbar-nav" style={{float: 'right'}}>
 
-                                <li className="nav-item" style={{float: 'right',border:'1px solid '}}>
-                                    <a className="nav-link js-scroll-trigger"  style={{color:"pink",marginLeft:'0px',fontSize:'12px'}}>
+                                <li className="nav-item" style={{float: 'right'}}>
+                                    <a className="nav-link js-scroll-trigger"  style={{marginTop:'6%',color:"pink",marginLeft:'0px',fontSize:'12px',border:'1px solid black'}}>
                                         <i className="fa fa-id-card" aria-hidden="true">
                                         </i>&nbsp;&nbsp;&nbsp;CUSTOMERS&nbsp;{customerNumbers}&nbsp;&nbsp;</a>
                                 </li>
                                 &nbsp;
-                                <li  className="nav-item" style={{float: 'right',border:'1px solid '}}>
-                                    <a className="nav-link js-scroll-trigger" style={{color:"pink",fontSize:'12px'}}>
+                                <li  className="nav-item" style={{float: 'right'}}>
+                                    <a className="nav-link js-scroll-trigger" style={{marginTop:'8%',color:"pink",fontSize:'12px',border:'1px solid black'}}>
                                         <i className="fa fa-sitemap" aria-hidden="true">
                                         </i>
                                         &nbsp;&nbsp;&nbsp;ITEMS&nbsp;{itemsNumbers}&nbsp;&nbsp;</a>
                                 </li>
+                                &nbsp;
                                 <li className="nav-item" style={{float: 'right'}}>
+                                    <a className="nav-link js-scroll-trigger"  style={{marginTop:'6%',color:"pink",marginLeft:'0px',fontSize:'12px',border:'1px solid black'}}>
+                                        <i className="fa fa-id-card" aria-hidden="true">
+                                        </i>&nbsp;&nbsp;&nbsp;ORDERS&nbsp;{this.state.count}&nbsp;&nbsp;</a>
+                                </li>
 
+                                &nbsp;&nbsp;
+                                <li className="nav-item" style={{float: 'right'}}>
+                                    {/*<li className="nav-item">*/}
+                                    <i className="nav-link js-scroll-trigger" style={{color:"pink",fontSize:'12px'}}>
+                                        <img height="30px" style={{borderRadius:'20px'}}
+                                             src="https://scontent.fcmb5-1.fna.fbcdn.net/v/t1.0-9/40143726_1000077100153006_6694312692435386368_n.jpg?_nc_cat=0&oh=1eb11266b0cc87e535e6ba7a8d42e84e&oe=5BFD3168"
+                                             alt="user" />
+                                    </i>
+                                    {/*</li>*/}
                                 </li>
                             </ul>
 
@@ -167,6 +203,7 @@ const mapDispatchToProps = (dispatch) => {
         customerBodyHandler: (data) => dispatch(actionCreators.customerHandler(data)),
         itemBodyHandler: (data) => dispatch(actionCreators.itemHandler(data)),
         placeorderBodyHandler: (data) => dispatch(actionCreators.placeorderHandler(data)),
+        orderBodyHandler: (data) => dispatch(actionCreators.orderHandler(data)),
 
     }
 };

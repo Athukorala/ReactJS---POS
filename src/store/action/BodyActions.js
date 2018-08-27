@@ -22,3 +22,10 @@ export const placeorderHandler = (data) => {
         value: data
     }
 };
+
+export const orderHandler = (data) => {
+    return {
+        type: actionTypes.ORDER_MANAGE,
+        value: data
+    }
+};

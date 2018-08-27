@@ -6,6 +6,7 @@ const initialState = {
     customerDashbord: true,
     itemDashbord: false,
     placeorderDashbord: false,
+    orderDashbord: false
 };
 
 const reducer=(state=initialState,action)=>{
@@ -18,6 +19,7 @@ const reducer=(state=initialState,action)=>{
                 customerDashbord: true,
                 itemDashbord: false,
                 placeorderDashbord: false,
+                orderDashbord: false
             };
         case actionTypes.ITEM_MANAGE:
             return {
@@ -25,6 +27,7 @@ const reducer=(state=initialState,action)=>{
                 customerDashbord: false,
                 itemDashbord: true,
                 placeorderDashbord: false,
+                orderDashbord: false
             };
 
         case actionTypes.PLACEORDER_MANAGE:
@@ -33,8 +36,17 @@ const reducer=(state=initialState,action)=>{
                 customerDashbord: false,
                 itemDashbord: false,
                 placeorderDashbord: true,
+                orderDashbord: false
             };
 
+        case actionTypes.ORDER_MANAGE:
+            return {
+                ...state,
+                customerDashbord: false,
+                itemDashbord: false,
+                placeorderDashbord: false,
+                orderDashbord: true
+            };
 
 
         default:

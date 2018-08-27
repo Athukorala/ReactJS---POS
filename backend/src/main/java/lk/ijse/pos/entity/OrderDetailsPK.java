@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class OrderDetailsPK implements Serializable {
 
     private int oid;
-    private int iid;
+    private int code;
 
     public OrderDetailsPK() {
 
@@ -15,7 +15,7 @@ public class OrderDetailsPK implements Serializable {
 
     public OrderDetailsPK(int oid, int iid) {
         this.oid = oid;
-        this.iid = iid;
+        this.code = iid;
     }
 
 

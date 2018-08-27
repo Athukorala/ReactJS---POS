@@ -57,6 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> findAllCustomers() {
         List<Customer> allCustomers = repository.findAll();
+        System.out.println(allCustomers);
         List<CustomerDTO> dtos = new ArrayList<>();
         allCustomers.forEach(c -> dtos.add(new CustomerDTO(c.getId(), c.getName(), c.getAddress())));
         return dtos;

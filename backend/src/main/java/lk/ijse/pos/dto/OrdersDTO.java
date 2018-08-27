@@ -1,8 +1,9 @@
 package lk.ijse.pos.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class OrdersDTO {
+public class OrdersDTO  implements Serializable {
 
     private int oid;
     private String date;
@@ -15,12 +16,12 @@ public class OrdersDTO {
     public OrdersDTO() {
     }
 
-//    public OrdersDTO(int oid, String date, double fullprice) {
-//        this.oid = oid;
-//        this.date = date;
-//        this.fullprice = fullprice;
-//
-//    }
+    public OrdersDTO(int oid, String date, double fullprice) {
+        this.oid = oid;
+        this.date = date;
+        this.fullprice = fullprice;
+
+    }
 
     public OrdersDTO(int oid, String date, double fullprice, CustomerDTO customerDTO, List<ItemDTO> itemList) {
         this.oid = oid;
@@ -28,6 +29,13 @@ public class OrdersDTO {
         this.fullprice = fullprice;
         this.customerDTO = customerDTO;
         this.itemList = itemList;
+    }
+
+    public OrdersDTO(int oid, String date, double fullprice, CustomerDTO customerDTO) {
+        this.oid = oid;
+        this.date = date;
+        this.fullprice = fullprice;
+        this.customerDTO = customerDTO;
     }
 
     public int getOid() {

@@ -1,6 +1,8 @@
 package lk.ijse.pos.dto;
 
-public class ItemDTO {
+import java.io.Serializable;
+
+public class ItemDTO implements Serializable {
     private int code;
     private String description;
     private double unitprice;

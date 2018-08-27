@@ -4,7 +4,8 @@ export  {
 
     customerHandler,
     itemHandler,
-    placeorderHandler
+    placeorderHandler,
+    orderHandler
 
 } from './BodyActions'
 

@@ -1,6 +1,8 @@
 package lk.ijse.pos.dto;
 
-public class OrderDetailsDTO {
+import java.io.Serializable;
+
+public class OrderDetailsDTO implements Serializable {
 
     private int oid; // order id
     private int code; // item code

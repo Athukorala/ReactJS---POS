@@ -14,6 +14,9 @@ let totalPrice = 0
 class App extends Component {
 
     state = {
+
+        orderId:0,
+
         customerDetails: [],
         itemDetails: [],
         totalAmount: 0,
@@ -28,25 +31,34 @@ class App extends Component {
         itemDescription: '',
         itemQty: '',
         itemPrice: '',
-
         enterQty: '',
 
         // place order table
 
         tableValue: [
-            // {
-            //     "code": 1, "description": "abc", "qty": 3, "unitprice": 340
-            // },
-            // {
-            //     "code": 2, "description": "xyz", "qty": 21, "unitprice": 120
-            // }
+            // {"code": 1, "description": "abc", "qty": 3, "unitprice": 340}, { "code": 2, "description": "xyz", "qty": 21, "unitprice": 120  }
         ]
 
     };
 
     componentDidMount() {
         this.didMountTick();
+        this.calculateOid();
     }
+
+    calculateOid = () => {
+        axios.get(`orders`)
+            .then(response => {
+                this.setState({
+                    orderId:response.data
+                })
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    };
+
 
     didMountTick = () => {
         // this.props.start(true);
@@ -308,7 +320,7 @@ class App extends Component {
         } else {
             this.props.start(true);
             const oderObj={
-                "oid":0,
+                "oid":this.state.orderId,
                 "date":this.state.orderDate,
                 "fullprice":this.state.totalAmount,
 
@@ -324,25 +336,16 @@ class App extends Component {
                     this.props.stop(true);
                     if(response.status === 200){
                         this.setState({
-                            orderDate:0,
                             totalAmount:0,
                             tableValue:[]
                         })
-
-
                     }
+                    this.calculateOid();
 
                 })
                 .catch(error => {
                     console.log(error)
                 });
-
-                // console.log("Sending backend ............");
-                // console.log("OrderDate: "+this.state.orderDate);
-                // console.log("Customer Id: "+document.getElementById("example1").value);
-                // console.log(this.state.tableValue);
-                // console.log("Total unitprice: "+this.state.totalAmount);
-                // console.log("...........................");
         }
 
 
