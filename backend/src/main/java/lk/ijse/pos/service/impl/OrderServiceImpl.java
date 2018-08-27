@@ -46,13 +46,21 @@ public class OrderServiceImpl implements OrderService {
             OrderDetails od = new OrderDetails();
             Orders orders = new Orders(dto.getOid(), dto.getDate(), dto.getFullprice(), customer1);
 
+            // item qty update
+            int enterQty = itemDTO.getQty();
+            int qty = item.getQty();
+            int newQty = qty - enterQty;
+
+            Item itemEntity = new Item(itemDTO.getCode(), itemDTO.getDescription(), item.getUnitprice(), newQty);
+
             od.setOrderdetailsId(pk);
             od.setAmount(itemDTO.getUnitprice());
-            od.setItem(item);
+            od.setItem(itemEntity);
 //            od.setOrders(orders);
             od.setItemQty(itemDTO.getQty());
 
             odList.add(od);
+
         }
 
 
@@ -90,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
         System.out.println(it);
         while (it.hasNext()) {
             Object line = it.next();
-            Orders oa=new Orders();
+            Orders oa = new Orders();
 //            oa.getOid(line[0]);
 //            System.out.println(line[0]);
 //            Equip eq = new Equip();

@@ -340,6 +340,7 @@ class App extends Component {
                             tableValue:[]
                         })
                     }
+                    this.didMountTick();
                     this.calculateOid();
 
                 })
