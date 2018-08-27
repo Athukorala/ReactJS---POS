@@ -42,13 +42,18 @@ class ImageCard extends Component {
 
                             <img id={this.props.id+"image"} className={classes.img} src={this.props.image} alt="Summary"
                                  style={{width:'100%',height:'100%',maxWidth: '100%'}}/>
-                            {/*<div style={{height:'1px',background:'lightgray'}}/>*/}
+
                         </div>
                         <div className="card-body" style={{margin:'0',paddingTop:'5%',paddingBottom:'5%'}}>
-                            <p  style={{margin:'0',color: 'black'}} className="card-text">{this.props.details}</p>
-                            <small style={{color: 'black'}}>
+                            <small style={{color: 'red'}}>
+                                {"Order id: "+this.props.id}
+                            </small>
+                            <br/>
+                            <small style={{color: 'black',fontSize:'14px'}}>
                                 {this.props.date}
                             </small>
+                            <br/>
+                            <small  style={{margin:'0',color: 'black',fontSize:'13px'}} className="card-text">{this.props.details}</small>
                         </div>
                     </div>
 

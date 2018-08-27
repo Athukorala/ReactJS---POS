@@ -5,6 +5,8 @@ import lk.ijse.pos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -38,11 +40,12 @@ public class OrderController {
 
         return service.getAll();
     }
-
-
-    @GetMapping("/ab")
-    public Object ab(){
-        return service.getAB();
-    }
+//
+////    @SuppressWarnings({ "unchecked"})
+//    @GetMapping("/ab")
+//    public List<Object> ab(){
+//
+//        return service.getA();
+//    }
 
 }

@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface OrdersRepository extends JpaRepository<Orders,Integer> {
 
-        @Query("SELECT o.oid, o.date, o.fullprice from Orders o")
-        List<Orders> getAB();
+        @Query("SELECT oid, date, fullprice from Orders")
+        List<Object> getAll();
+
+//        @NamedNativeQuery(query="select * from orders", resultClass=Orders.class){}
+//        List<Orders> getAB2();
 }

@@ -12,10 +12,10 @@ public class Orders  implements Serializable {
 
     private String date;
     private double fullprice;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<OrderDetails> orderDetails;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumns(@JoinColumn(name = "id",referencedColumnName = "id",insertable = false,updatable = false))
     private Customer customer; // customer
 
@@ -35,6 +35,12 @@ public class Orders  implements Serializable {
         this.date = date;
         this.fullprice = fullprice;
         this.customer = customer;
+    }
+
+    public Orders(int oid, String date, double fullprice) {
+        this.oid = oid;
+        this.date = date;
+        this.fullprice = fullprice;
     }
 
     public int getOid() {

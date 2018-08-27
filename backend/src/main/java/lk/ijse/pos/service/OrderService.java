@@ -7,7 +7,7 @@ import java.util.List;
 public interface OrderService {
     void saveOrder(OrdersDTO dto);
     Long getOrderCount();
-    List<OrdersDTO> getAll();
-    List<OrdersDTO> getAB();
+    List<Object> getAll();
+
 
 }

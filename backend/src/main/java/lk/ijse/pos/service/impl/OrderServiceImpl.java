@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -74,52 +73,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrdersDTO> getAll() {
-//        System.out.println("okk");
-        List<Orders> all = repository.findAll();
-        System.out.println(all);
-        List<OrdersDTO> dtos = new ArrayList<>();
-        for (Orders c : all) {
-            System.out.println(c.getOid());
-        }
-        all.forEach(c -> dtos.add(new OrdersDTO(c.getOid(), c.getDate(), c.getFullprice())));
-        System.out.println(dtos);
-        return dtos;
+    public List<Object> getAll() {
 
-    }
+        List<Object> all = repository.getAll();
+        return all;
 
-    @Override
-    public List<OrdersDTO> getAB() {
-        List<Orders> all = repository.getAB();
-        Object[] ad = all.toArray();
-        System.out.println(ad);
-//        List<Object> obj= Collections.singletonList(all);
-        Iterator it = all.iterator();
-        System.out.println(it);
-        while (it.hasNext()) {
-            Object line = it.next();
-            Orders oa = new Orders();
-//            oa.getOid(line[0]);
-//            System.out.println(line[0]);
-//            Equip eq = new Equip();
-//            eq.setIdEquipement(line[0]);
-//            eq.setTitre(line[1])
-            List<Customer> customers = new ArrayList<>();
-//            eq.setDescription(line[2]);
-            //And set all the Equip fields here
-            //And last thing add it to the list
-
-//            list.add(eq);
-        }
-
-        for (Object c : ad) {
-//            System.out.println(c);
-        }
-        System.out.println("----***************---------");
-        System.out.println(all);
-        List<OrdersDTO> dtos = new ArrayList<>();
-        all.forEach(c -> dtos.add(new OrdersDTO(c.getOid(), c.getDate(), c.getFullprice())));
-//        List<OrdersDTO> allDtos = new ArrayList<>();
-        return dtos;
     }
 }

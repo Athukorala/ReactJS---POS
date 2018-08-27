@@ -15,7 +15,7 @@ class App extends Component{
     }
 
     tick = () => {
-        axios.get(`orders/ab`)
+        axios.get(`orders/getAll`)
             .then(response => {
                 console.log(response.data)
                 this.setState({
@@ -29,16 +29,28 @@ class App extends Component{
     }
 
     render(){
+        let get=null;
+        if(this.state.orderDetails.length!==0){
+           get= this.state.orderDetails.map((row,index)=>{
+                // console.log(row[0])
+                // console.log(row[1])
+                // console.log(row[2])
+                return <ImageCard id={row[0]}  key={row[0]} details={"Order price: "+row[2]}  date={row[1]} image={Image}/>
+
+            })
+        }
+
         return(
             <div className={classes.mainDiv}>
                 <div className="row" style={{marginLeft:'10px'}}>
-                    <ImageCard id="1" details="POS" date="xx-xx-xxxx" image={Image}/>
-                    <ImageCard id="2" details="POS" date="xx-xx-xxxx" image={Image}/>
-                    <ImageCard id="3" details="POS" date="xx-xx-xxxx" image={Image}/>
-                    <ImageCard id="4" details="POS" date="xx-xx-xxxx" image={Image}/>
-                    <ImageCard id="5" details="POS" date="xx-xx-xxxx" image={Image}/>
-                    <ImageCard id="6" details="POS" date="xx-xx-xxxx" image={Image}/>
-                    <ImageCard id="7" details="POS" date="xx-xx-xxxx" image={Image}/>
+                    {get}
+                    {/*<ImageCard id="1" details="POS" date="xx-xx-xxxx" image={Image}/>*/}
+                    {/*<ImageCard id="2" details="POS" date="xx-xx-xxxx" image={Image}/>*/}
+                    {/*<ImageCard id="3" details="POS" date="xx-xx-xxxx" image={Image}/>*/}
+                    {/*<ImageCard id="4" details="POS" date="xx-xx-xxxx" image={Image}/>*/}
+                    {/*<ImageCard id="5" details="POS" date="xx-xx-xxxx" image={Image}/>*/}
+                    {/*<ImageCard id="6" details="POS" date="xx-xx-xxxx" image={Image}/>*/}
+                    {/*<ImageCard id="7" details="POS" date="xx-xx-xxxx" image={Image}/>*/}
                 </div>
 
             </div>
