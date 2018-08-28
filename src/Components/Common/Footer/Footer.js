@@ -11,8 +11,8 @@ class FooterPage extends Component{
                     <Container className="text-left">
 
                     </Container>
-                    <br />
-                    <div className="footer-copyright text-center">
+
+                    <div className="footer-copyright text-center" style={{marginTop:'-1%'}}>
                         <a target="_blank" rel="noopener noreferrer"  style={footerCopyrightStyle}> POS (SPRING | REACT)</a> © 2018 All Rights Reserved
 
                     </div>

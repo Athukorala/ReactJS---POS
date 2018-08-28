@@ -36,24 +36,31 @@ class ImageCard extends Component {
     render() {
         return (
 
-            <div className="col-sm-3" style={{marginBottom: '10px',marginTop: '10px'}}>
+            <div className="col-sm-3" style={colStyle}>
                  <div id={this.props.id} className="card" style={card} onMouseEnter={this.rowSelector} onMouseLeave={this.rowUnSelector}>
                         <div className={classes.div} style={{height:'150px'}}>
 
                             <img id={this.props.id+"image"} className={classes.img} src={this.props.image} alt="Summary"
-                                 style={{width:'100%',height:'100%',maxWidth: '100%'}}/>
+                                 style={imgStyle}/>
 
                         </div>
-                        <div className="card-body" style={{margin:'0',paddingTop:'5%',paddingBottom:'5%'}}>
-                            <small style={{color: 'red'}}>
+                        <div className="card-body" style={cardBodyStyle}>
+                            <br/>
+                            <center>
+                                <small style={smallStyle}>
+                                    {this.props.name}
+                                </small>
+                                <br/><br/>
+                            </center>
+                            <small style={idStyle}>
                                 {"Order id: "+this.props.id}
                             </small>
                             <br/>
-                            <small style={{color: 'black',fontSize:'14px'}}>
+                            <small style={dateStyle}>
                                 {this.props.date}
                             </small>
                             <br/>
-                            <small  style={{margin:'0',color: 'black',fontSize:'13px'}} className="card-text">{this.props.details}</small>
+                            <small  style={smallTextStyle} className="card-text">{this.props.details}</small>
                         </div>
                     </div>
 
@@ -63,4 +70,13 @@ class ImageCard extends Component {
     }
 
 };
+
+const smallStyle={color: 'black',padding:'7px',border:'1px solid lightgray',fontSize:'15px'};
+const cardBodyStyle = {margin:'0',paddingTop:'5%',paddingBottom:'5%'};
+const smallTextStyle = {margin:'0',color: 'black',fontSize:'13px'};
+const idStyle = {color: 'red'};
+const imgStyle = {width:'100%',height:'100%',maxWidth: '100%'};
+const dateStyle = {color: 'black',fontSize:'14px'};
+const colStyle = {marginBottom: '10px',marginTop: '10px'};
+
 export default ImageCard;

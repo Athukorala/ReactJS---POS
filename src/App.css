@@ -108,7 +108,7 @@ input{
 
 /* Handle */
 .div::-webkit-scrollbar-thumb {
-    background: #818181;
+    background: aquamarine;
     border-radius: 10px;
 }
 

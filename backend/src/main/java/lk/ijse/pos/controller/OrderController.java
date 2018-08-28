@@ -1,6 +1,7 @@
 package lk.ijse.pos.controller;
 
 import lk.ijse.pos.dto.OrdersDTO;
+import lk.ijse.pos.entity.Orders;
 import lk.ijse.pos.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,11 +42,13 @@ public class OrderController {
         return service.getAll();
     }
 //
-////    @SuppressWarnings({ "unchecked"})
-//    @GetMapping("/ab")
-//    public List<Object> ab(){
-//
-//        return service.getA();
-//    }
+//    @SuppressWarnings({ "unchecked"})
+    @GetMapping("/ab")
+    public List<Orders> ab(){
+
+        List<Orders> list=service.findAll();
+        System.out.println(list);
+        return list;
+    }
 
 }

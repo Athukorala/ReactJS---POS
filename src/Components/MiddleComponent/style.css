@@ -7,6 +7,40 @@
     color:white
 }
 
+.mainDiv{
+    background-color:black;
+    /*margin: 10%;*/
+    margin-top: 7%;
+    width: 75%;
+    margin-left: 13%;
+    color:white;
+
+    max-height: 400px;
+    /*margin-top: 3%;*/
+    overflow-x: hidden;
+    ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+
+/* width */
+.mainDiv::-webkit-scrollbar {
+    width: 5px;
+
+}
+
+/* Track */
+.mainDiv::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+.mainDiv::-webkit-scrollbar-thumb {
+    background: aquamarine;
+    border-radius: 10px;
+}
+
+
 
 /*.mainDiv:hover{*/
     /*color:gray;*/

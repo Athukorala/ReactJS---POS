@@ -35,7 +35,10 @@ class App extends Component{
                 // console.log(row[0])
                 // console.log(row[1])
                 // console.log(row[2])
-                return <ImageCard id={row[0]}  key={row[0]} details={"Order price: "+row[2]}  date={row[1]} image={Image}/>
+               console.log(row[3].name)
+
+
+                return <ImageCard id={row[0]}  key={row[0]} name={row[3].name} details={"Order price: "+row[2]}  date={row[1]} image={Image}/>
 
             })
         }

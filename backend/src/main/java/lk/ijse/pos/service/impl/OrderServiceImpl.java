@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 
             Item item = itemRepository.findById(itemDTO.getCode()).get();
             OrderDetails od = new OrderDetails();
-            Orders orders = new Orders(dto.getOid(), dto.getDate(), dto.getFullprice(), customer1);
+           // Orders orders = new Orders(dto.getOid(), dto.getDate(), dto.getFullprice(), customer1);
 
             // item qty update
             int enterQty = itemDTO.getQty();
@@ -78,5 +78,10 @@ public class OrderServiceImpl implements OrderService {
         List<Object> all = repository.getAll();
         return all;
 
+    }
+
+    @Override
+    public List<Orders> findAll() {
+        return repository.findAll();
     }
 }

@@ -12,12 +12,13 @@ public class Orders  implements Serializable {
 
     private String date;
     private double fullprice;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<OrderDetails> orderDetails;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumns(@JoinColumn(name = "id",referencedColumnName = "id",insertable = false,updatable = false))
+    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id",referencedColumnName = "id",insertable = false,updatable = false)
     private Customer customer; // customer
+
 
     public Orders() {
     }
@@ -82,6 +83,14 @@ public class Orders  implements Serializable {
     public void setOrderDetails(List<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
     }
+
+//    public int getCustomerId() {
+//        return customerId;
+//    }
+//
+//    public void setCustomerId(int customerId) {
+//        this.customerId = customerId;
+//    }
 
     @Override
     public String toString() {
