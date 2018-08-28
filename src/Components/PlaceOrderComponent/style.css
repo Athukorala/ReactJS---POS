@@ -27,6 +27,6 @@
 
 /* Handle */
 .mainDiv::-webkit-scrollbar-thumb {
-    background: aquamarine;
+    background: burlywood;
     border-radius: 10px;
 }

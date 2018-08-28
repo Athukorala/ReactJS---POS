@@ -59,17 +59,17 @@ class App extends Component {
 
     setAddBorder = () => {
         this.clearBorders();
-        document.getElementById("add").style.borderBottom = "3px solid aquamarine"
+        document.getElementById("add").style.borderBottom = "3px solid burlywood"
     };
 
     setUpdateBorder = () => {
         this.clearBorders();
-        document.getElementById("update").style.borderBottom = "3px solid aquamarine"
+        document.getElementById("update").style.borderBottom = "3px solid burlywood"
     };
 
     setViewBorder = () => {
         this.clearBorders();
-        document.getElementById("view").style.borderBottom = "3px solid aquamarine"
+        document.getElementById("view").style.borderBottom = "3px solid burlywood"
     };
 
     clearBorders = () => {
