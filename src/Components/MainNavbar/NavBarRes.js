@@ -12,10 +12,10 @@ class App extends Component {
     state = {
         customerDetails: [],
         itemDetails: [],
-        count:0
+        count: 0
     };
 
-    componentDidMount(){
+    componentDidMount() {
         this.tick();
         setInterval(this.tick, 5000);
         this.cus();
@@ -51,7 +51,7 @@ class App extends Component {
         axios.get(`orders/getFullCount`)
             .then(response => {
                 this.setState({
-                    count:response.data
+                    count: response.data
                 })
 
             })
@@ -62,26 +62,26 @@ class App extends Component {
 
     cus = () => {
         this.hideColor();
-        document.getElementById("cusNav").style.color=" rgb(255, 237, 188";
+        document.getElementById("cusNav").style.color = " rgb(255, 237, 188";
         this.props.customerBodyHandler(true);
     }
 
     item = () => {
         this.hideColor();
-        document.getElementById("itemNav").style.color=" rgb(255, 237, 188";
+        document.getElementById("itemNav").style.color = " rgb(255, 237, 188";
         this.props.itemBodyHandler(true);
     }
 
     placeorder = () => {
         this.hideColor();
-        document.getElementById("placeNav").style.color=" rgb(255, 237, 188";
+        document.getElementById("placeNav").style.color = " rgb(255, 237, 188";
         this.props.placeorderBodyHandler(true);
     }
 
     order = () => {
 
         this.hideColor();
-        document.getElementById("orderNav").style.color=" rgb(255, 237, 188";
+        document.getElementById("orderNav").style.color = " rgb(255, 237, 188";
         this.props.orderBodyHandler(true);
     }
 
@@ -91,13 +91,15 @@ class App extends Component {
 
         return (
             <div className={classes.nav} style={{
-                backgroundColor:'#001529',width:'100%',zIndex:'10',borderBottom:'1px solid  rgb(255, 237, 188',
-                position:'fixed',marginTop:'-7%'
+                backgroundColor: '#001529', width: '100%', zIndex: '10', borderBottom: '1px solid  rgb(255, 237, 188',
+                position: 'fixed', marginTop: '-7%'
             }}>
                 <nav className="navbar navbar-expand-lg navbar-light">
-                    <a style={{color:'gray',width:'10%',textAlign:'center',border:'1px solid'}} className="navbar-brand">
+                    <a style={{color: 'gray', width: '10%', textAlign: 'center', border: '1px solid'}}
+                       className="navbar-brand">
                         {/*මේක මගේ කඩේ*/}
-                        <img src="http://www.pos-ks.com/wp-content/uploads/2017/10/pos_logo_square_blue.png" alt="user" style={{width:'50%'}}/>
+                        <img src="http://www.pos-ks.com/wp-content/uploads/2017/10/pos_logo_square_blue.png" alt="user"
+                             style={{width: '50%'}}/>
                     </a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -105,7 +107,7 @@ class App extends Component {
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent" style={{float:'right'}}>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent" style={{float: 'right'}}>
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
                                 <a className="nav-link"> <span className="sr-only">(current)</span></a>
@@ -132,38 +134,57 @@ class App extends Component {
                             </li>
 
 
-
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                             <ul className="navbar-nav" style={{float: 'right'}}>
 
                                 <li className="nav-item" style={{float: 'right'}}>
-                                    <a className="nav-link js-scroll-trigger"  style={{marginTop:'6%',color:"pink",marginLeft:'0px',fontSize:'12px',border:'1px solid black'}}>
+                                    <a onClick={this.cus} className="nav-link js-scroll-trigger" style={{
+                                        marginTop: '6%',
+                                        color: "pink",
+                                        marginLeft: '0px',
+                                        fontSize: '12px',
+                                        border: '1px solid black'
+                                    }}>
                                         <i className="fa fa-id-card" aria-hidden="true">
                                         </i>&nbsp;&nbsp;&nbsp;CUSTOMERS&nbsp;{customerNumbers}&nbsp;&nbsp;</a>
                                 </li>
                                 &nbsp;
-                                <li  className="nav-item" style={{float: 'right'}}>
-                                    <a className="nav-link js-scroll-trigger" style={{marginTop:'8%',color:"pink",fontSize:'12px',border:'1px solid black'}}>
+                                <li className="nav-item" style={{float: 'right'}}>
+                                    <a onClick={this.item} className="nav-link js-scroll-trigger" style={{
+                                        marginTop: '8%',
+                                        color: "pink",
+                                        fontSize: '12px',
+                                        border: '1px solid black'
+                                    }}>
                                         <i className="fa fa-sitemap" aria-hidden="true">
                                         </i>
                                         &nbsp;&nbsp;&nbsp;ITEMS&nbsp;{itemsNumbers}&nbsp;&nbsp;</a>
                                 </li>
                                 &nbsp;
                                 <li className="nav-item" style={{float: 'right'}}>
-                                    <a className="nav-link js-scroll-trigger"  style={{marginTop:'6%',color:"pink",marginLeft:'0px',fontSize:'12px',border:'1px solid black'}}>
+                                    <a onClick={this.order} className="nav-link js-scroll-trigger" style={{
+                                        marginTop: '6%',
+                                        color: "pink",
+                                        marginLeft: '0px',
+                                        fontSize: '12px',
+                                        border: '1px solid black'
+                                    }}>
                                         <i className="fa fa-id-card" aria-hidden="true">
                                         </i>&nbsp;&nbsp;&nbsp;ORDERS&nbsp;{this.state.count}&nbsp;&nbsp;</a>
                                 </li>
 
                                 &nbsp;&nbsp;
                                 <li className="nav-item" style={{float: 'right'}}>
-                                    {/*<li className="nav-item">*/}
-                                    <i className="nav-link js-scroll-trigger" style={{color:"pink",fontSize:'12px'}}>
-                                        <img height="30px" style={{borderRadius:'20px'}}
-                                             src="https://scontent.fcmb5-1.fna.fbcdn.net/v/t1.0-9/40143726_1000077100153006_6694312692435386368_n.jpg?_nc_cat=0&oh=1eb11266b0cc87e535e6ba7a8d42e84e&oe=5BFD3168"
-                                             alt="user" />
-                                    </i>
+                                    <i className="nav-link js-scroll-trigger"
+                                           style={{cursor: 'pointer', color: "pink", fontSize: '12px'}}>
+                                        <a href="https://www.linkedin.com/in/tharinduathukorala" target="_blank">
+                                            <img height="30px" style={{borderRadius: '20px'}}
+                                                 src="https://scontent.fcmb5-1.fna.fbcdn.net/v/t1.0-9/40143726_1000077100153006_6694312692435386368_n.jpg?_nc_cat=0&oh=1eb11266b0cc87e535e6ba7a8d42e84e&oe=5BFD3168"
+                                                 alt="user"/>
+                                        </a>
+                                        </i>
+
                                     {/*</li>*/}
                                 </li>
                             </ul>
@@ -174,19 +195,19 @@ class App extends Component {
             </div>
         )
     }
+
     hideColor = () => {
-        document.getElementById("cusNav").style.color="rgb(189, 189, 189)";
-        document.getElementById("itemNav").style.color="rgb(189, 189, 189)";
-        document.getElementById("orderNav").style.color="rgb(189, 189, 189)";
-        document.getElementById("placeNav").style.color="rgb(189, 189, 189)";
+        document.getElementById("cusNav").style.color = "rgb(189, 189, 189)";
+        document.getElementById("itemNav").style.color = "rgb(189, 189, 189)";
+        document.getElementById("orderNav").style.color = "rgb(189, 189, 189)";
+        document.getElementById("placeNav").style.color = "rgb(189, 189, 189)";
         //  rgb(255, 237, 188
     }
 }
 
 
-
-const aStyle={
-    color:'rgb(189, 189, 189)',fontSize:'14px'
+const aStyle = {
+    color: 'rgb(189, 189, 189)', fontSize: '14px'
 };
 
 const mapStateToProps = (state) => {

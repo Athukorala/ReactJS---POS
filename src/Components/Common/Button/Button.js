@@ -10,7 +10,7 @@ class App extends Component {
 
                         style={{
                             width: this.props.width ? this.props.width : '30%',
-                            borderRadius: '25px',
+                            // borderRadius: '25px',
                             height: this.props.height ? this.props.height : '40px',
                             // backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : '#00C853',
                             background: this.props.background ? this.props.background : 'linear-gradient(to right, #3e5151, #decba4)',
@@ -20,7 +20,7 @@ class App extends Component {
                             outline: 'none',
                             marginBottom: '5%',
                             ":hover": {
-                                background: 'linear-gradient(to left, #ed4264, #ffedbc)'
+                                background: 'linear-gradient(to left, #ed4264, #ffedbc)',color:'black'
                             }
 
                         }} disabled={this.props.disabled}>{this.props.children}</button>

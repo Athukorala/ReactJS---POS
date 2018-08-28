@@ -11,8 +11,12 @@ class App extends Component {
                        style={{
                            color: this.props.color ? this.props.color: 'black',
                            width: this.props.width ? this.props.width : '50%',
-                           height: this.props.height ? this.props.height : '38px',
-                           borderRadius: '20px',
+                           // height: this.props.height ? this.props.height : '38px',
+
+
+                           height: this.props.height ? this.props.height : '34px',
+                           border:'1px solid white',
+                           // borderRadius: '20px',
                            boxShadow:'none',
                            background:this.props.background?this.props.background:'linear-gradient(to left, antiquewhite,white)'
                        }}

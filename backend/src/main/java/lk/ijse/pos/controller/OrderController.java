@@ -41,8 +41,7 @@ public class OrderController {
 
         return service.getAll();
     }
-//
-//    @SuppressWarnings({ "unchecked"})
+
     @GetMapping("/ab")
     public List<Orders> ab(){
 

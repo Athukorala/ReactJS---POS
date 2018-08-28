@@ -3,6 +3,7 @@ import classes from "./style.css";
 import ImageCard from "../Common/Card/Card";
 import Image from "../../Content/images/ab.jpg"
 import axios from "../../axios/axios-order";
+import swal from "sweetalert";
 
 class App extends Component {
 
@@ -36,6 +37,12 @@ class App extends Component {
                 return <ImageCard id={row[0]} key={row[0]} name={row[3].name} details={"Order price: " + row[2]}
                                   date={row[1]} image={Image}/>
             })
+        }else{
+            swal({
+                text: "Your connection Lost!",
+                icon: "warning",
+                button: "Okay!",
+            });
         }
 
         return (

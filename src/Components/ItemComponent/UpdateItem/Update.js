@@ -26,7 +26,7 @@ class App extends Component {
     }
 
     didMountTick = () => {
-        this.props.start(true);
+        // this.props.start(true);
         axios.get(`items`)
             .then(response => {
                 console.log(response.data);
@@ -79,10 +79,9 @@ class App extends Component {
             this.noPriceBackground();
         }
 
+        let id = document.getElementById("example1").value;
 
-        if (this.state.name.trim() !== '' && this.state.qty !== '' && this.state.price !== '') {
-
-            let id = document.getElementById("example1").value;
+        if (this.state.name.trim() !== '' && this.state.qty !== '' && this.state.price !== '' && id !== '') {
 
             const itemObj = {
                 code: id,
@@ -117,7 +116,7 @@ class App extends Component {
                 });
         }else{
             swal({
-                text: "Please fill all textfield...!",
+                text: "Please fill all field...!",
                 icon: "warning",
                 button: "Okay!",
             });
@@ -158,22 +157,29 @@ class App extends Component {
 
         let id = document.getElementById("example1").value;
         console.log(id);
+        if(id!=="") {
+            axios.delete(`items/` + id)
+                .then(response1 => {
 
-        axios.delete(`items/` + id)
-            .then(response1 => {
+                    swal({
+                        text: "Removed!",
+                        icon: "success",
+                        button: "Okay!",
+                    });
 
-                swal({
-                    text: "Removed!",
-                    icon: "success",
-                    button: "Okay!",
+                    this.didMountTick()
+                })
+
+                .catch(error => {
+                    console.log("error: " + error)
                 });
-
-                this.didMountTick()
-            })
-
-            .catch(error => {
-                console.log("error: " + error)
+        }else{
+            swal({
+                text: "Please select id...!",
+                icon: "warning",
+                button: "Okay!",
             });
+        }
     };
 
     render() {
@@ -189,9 +195,7 @@ class App extends Component {
                 <div className="form-group">
                     <label htmlFor="example1">Select Id</label>
                     <select onChange={(event) => this.idChange(event)} className="form-control" id="example1" style={{
-                        background: 'linear-gradient(to right, rgb(219, 230, 246), rgb(197, 121, 109))',
-                        width: '30%',
-                        borderRadius: '20px'
+                       height:'34px',width: '30%',background:'linear-gradient(to left, antiquewhite, white)'
                     }}>
                         {options}
                     </select>

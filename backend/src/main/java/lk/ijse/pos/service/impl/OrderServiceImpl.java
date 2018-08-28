@@ -1,8 +1,6 @@
 package lk.ijse.pos.service.impl;
 
-import lk.ijse.pos.dto.CustomerDTO;
 import lk.ijse.pos.dto.ItemDTO;
-import lk.ijse.pos.dto.OrderDetailsDTO;
 import lk.ijse.pos.dto.OrdersDTO;
 import lk.ijse.pos.entity.*;
 import lk.ijse.pos.repository.CustomerRepository;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -43,7 +40,6 @@ public class OrderServiceImpl implements OrderService {
 
             Item item = itemRepository.findById(itemDTO.getCode()).get();
             OrderDetails od = new OrderDetails();
-           // Orders orders = new Orders(dto.getOid(), dto.getDate(), dto.getFullprice(), customer1);
 
             // item qty update
             int enterQty = itemDTO.getQty();
@@ -54,12 +50,11 @@ public class OrderServiceImpl implements OrderService {
 
             od.setOrderdetailsId(pk);
             od.setAmount(itemDTO.getUnitprice());
-            od.setItem(itemEntity);
-//            od.setOrders(orders);
             od.setItemQty(itemDTO.getQty());
 
             odList.add(od);
 
+            itemRepository.save(itemEntity);
         }
 
 

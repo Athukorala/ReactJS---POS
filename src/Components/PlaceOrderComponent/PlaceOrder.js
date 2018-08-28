@@ -465,7 +465,7 @@ class App extends Component {
                                 <label htmlFor="example1">Select Customer Id</label>
                                 <select onChange={(event) => this.customerIdChange(event)} className="form-control"
                                         id="example1"
-                                        style={{width: '50%', borderRadius: '20px'}}>
+                                        style={{width: '50%',height:'34px', background:'linear-gradient(to left, antiquewhite, white)'}}>
 
                                     {customerOptions}
 
@@ -501,7 +501,7 @@ class App extends Component {
                                 <label htmlFor="itemKeyGen">Select Item Id</label>
                                 <select onChange={(event) => this.itemIdChange(event)} className="form-control"
                                         id="itemKeyGen"
-                                        style={{width: '100%', borderRadius: '20px'}}>
+                                        style={{width: '100%', height:'34px', background:'linear-gradient(to left, antiquewhite, white)'}}>
                                     {itemOptions}
                                 </select>
                             </div>

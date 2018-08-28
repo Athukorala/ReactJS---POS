@@ -1,5 +1,6 @@
 package lk.ijse.pos.controller;
 //import org.apache.commons.io.IOUtils;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,47 +13,47 @@ import java.nio.file.StandardCopyOption;
 @CrossOrigin
 public class ImageUploadController {
 
-    private static String UPLOAD_DIR="WEB-INF/images";
+    private static String UPLOAD_DIR = "WEB-INF/images";
 
     @PostMapping("/customer")
-    public String uploadCustomerPhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request){
+    public String uploadCustomerPhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         System.out.println(file);
         System.out.println(request);
-        try{
+        try {
 
-            String orgFileName=file.getOriginalFilename();
+            String orgFileName = file.getOriginalFilename();
 
-            String path=request.getServletContext().getRealPath("")+UPLOAD_DIR+"/customer"+ File.separator +orgFileName;
-            InputStream inputStream=file.getInputStream();
+            String path = request.getServletContext().getRealPath("") + UPLOAD_DIR + "/customer" + File.separator + orgFileName;
+            InputStream inputStream = file.getInputStream();
 
-            saveFile(inputStream,path);
+            saveFile(inputStream, path);
             return orgFileName;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
     @PostMapping("/item")
-    public String uploadItemPhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request){
-        try{
+    public String uploadItemPhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        try {
 
-            String orgFileName=file.getOriginalFilename();
+            String orgFileName = file.getOriginalFilename();
 
-            String path=request.getServletContext().getRealPath("")+UPLOAD_DIR+"/item"+ File.separator +orgFileName;
-            InputStream inputStream=file.getInputStream();
+            String path = request.getServletContext().getRealPath("") + UPLOAD_DIR + "/item" + File.separator + orgFileName;
+            InputStream inputStream = file.getInputStream();
 
-            saveFile(inputStream,path);
+            saveFile(inputStream, path);
             return orgFileName;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
-    private void saveFile(InputStream inputStream,String path){
+    private void saveFile(InputStream inputStream, String path) {
         File targetFile = new File(path);
 
         try {

@@ -28,8 +28,8 @@ public class ItemController {
 
     @PostMapping("/{id}")
     public void updateItem(@PathVariable("id") int itemId,
-                               @RequestBody ItemDTO ItemDTO) {
-        System.out.println("id: "+itemId);
+                           @RequestBody ItemDTO ItemDTO) {
+        System.out.println("id: " + itemId);
         System.out.println(ItemDTO);
 
         service.updateItem(itemId, ItemDTO);
@@ -44,7 +44,7 @@ public class ItemController {
     @GetMapping
     public Object findAllCustomers() {
 
-            return service.findAllItems();
+        return service.findAllItems();
 
     }
 }
