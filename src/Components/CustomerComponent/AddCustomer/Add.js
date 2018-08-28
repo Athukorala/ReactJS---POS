@@ -6,8 +6,9 @@ import * as actionCreators from '../../../store/action/index';
 // axios call---
 
 import customerAxios from '../../../axios/axios-customer';
-import uploadAxios from '../../../axios/axios-imageupload';
+// import uploadAxios from '../../../axios/axios-imageupload';
 import {connect} from "react-redux";
+import swal from 'sweetalert';
 import ImageUpload from "../../Common/ImageUpload/ImagUpload";
 // import AB from "../../Common/ImageUpload/AB";
 
@@ -74,13 +75,36 @@ class App extends Component {
                         });
                         this.isNameBackground();
                         this.isAddressBackground();
+                        swal({
+                            text: "Added Successfully!",
+                            // text: "You clicked the button!",
+                            icon: "success",
+                            button: "Okay!",
+                        });
                         // this.props.stop(true);
+                    }else{
+                        swal({
+                            text: "Failed!",
+                            icon: "warning",
+                            button: "Okay!",
+                        });
                     }
 
                 })
                 .catch(error => {
                     console.log(error)
+                    swal({
+                        text: "Failed!",
+                        icon: "warning",
+                        button: "Okay!",
+                    });
                 });
+        }else{
+            swal({
+                text: "Please fill all textfield...!",
+                icon: "warning",
+                button: "Okay!",
+            });
         }
     };
 

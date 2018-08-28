@@ -3,6 +3,7 @@ import Input from '../../Common/TextField/Input';
 import Button from '../../Common/Button/Button';
 import itemAxios from "../../../axios/axios-item";
 import ImageUpload from "../../Common/ImageUpload/ImagUpload";
+import swal from "sweetalert";
 
 class App extends Component {
 
@@ -54,12 +55,37 @@ class App extends Component {
                         this.isQtyBackground();
                         this.isPriceBackground();
                         // this.props.stop(true);
+
+                        swal({
+                            text: "Added Successfully!",
+                            // text: "You clicked the button!",
+                            icon: "success",
+                            button: "Okay!",
+                        });
+
+                    }else{
+                        swal({
+                            text: "Failed!",
+                            icon: "warning",
+                            button: "Okay!",
+                        });
                     }
 
                 })
                 .catch(error => {
                     console.log(error)
+                    swal({
+                        text: "Failed!",
+                        icon: "warning",
+                        button: "Okay!",
+                    });
                 });
+        }else{
+            swal({
+                text: "Please fill all textfield...!",
+                icon: "warning",
+                button: "Okay!",
+            });
         }
     };
 

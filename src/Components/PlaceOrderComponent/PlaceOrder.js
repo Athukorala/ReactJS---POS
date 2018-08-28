@@ -8,6 +8,7 @@ import axiosItem from "../../axios/axios-item";
 import axios from "../../axios/axios-order";
 import * as actionCreators from "../../store/action";
 import connect from "react-redux/es/connect/connect";
+import swal from "sweetalert";
 
 let totalPrice = 0
 
@@ -316,7 +317,11 @@ class App extends Component {
     submit = () => {
 
         if (this.state.orderDate === '' || this.state.totalAmount === 0 || this.state.cusName === '') {
-            alert("Please fill all inputs..")
+            swal({
+                text: "Please try again! not complete ...!",
+                icon: "warning",
+                button: "Okay!",
+            });
         } else {
             this.props.start(true);
             const oderObj={
@@ -339,13 +344,33 @@ class App extends Component {
                             totalAmount:0,
                             tableValue:[]
                         })
+
+                        this.didMountTick();
+                        this.calculateOid();
+
+                        swal({
+                            text: "Successfully!",
+                            icon: "success",
+                            button: "Okay!",
+                        });
+
+                    }else{
+                        swal({
+                            text: "Failed!",
+                            icon: "warning",
+                            button: "Okay!",
+                        });
                     }
-                    this.didMountTick();
-                    this.calculateOid();
+
 
                 })
                 .catch(error => {
                     console.log(error)
+                    swal({
+                        text: "Failed!",
+                        icon: "warning",
+                        button: "Okay!",
+                    });
                 });
         }
 

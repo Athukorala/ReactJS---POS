@@ -4,6 +4,7 @@ import Button from "../../Common/Button/Button";
 import axios from "../../../axios/axios-item";
 import * as actionCreators from "../../../store/action";
 import connect from "react-redux/es/connect/connect";
+import swal from "sweetalert";
 
 class App extends Component {
 
@@ -95,12 +96,31 @@ class App extends Component {
                     if (response.status === 200) {
                         this.didMountTick();
                         this.props.stop(true);
+
+                        swal({
+                            text: "Added Successfully!",
+                            // text: "You clicked the button!",
+                            icon: "success",
+                            button: "Okay!",
+                        });
+                    }else{
+                        swal({
+                            text: "Failed!",
+                            icon: "warning",
+                            button: "Okay!",
+                        });
                     }
 
                 })
                 .catch(error => {
                     console.log(error)
                 });
+        }else{
+            swal({
+                text: "Please fill all textfield...!",
+                icon: "warning",
+                button: "Okay!",
+            });
         }
     };
 
@@ -141,6 +161,12 @@ class App extends Component {
 
         axios.delete(`items/` + id)
             .then(response1 => {
+
+                swal({
+                    text: "Removed!",
+                    icon: "success",
+                    button: "Okay!",
+                });
 
                 this.didMountTick()
             })

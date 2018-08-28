@@ -5,6 +5,7 @@ import connect from "react-redux/es/connect/connect";
 import customerAxios from "../../axios/axios-customer";
 import itemAxios from "../../axios/axios-item";
 import axios from "../../axios/axios-order";
+// import swal from 'sweetalert';
 // import icon from '../../Content/images/ab.png';
 
 class App extends Component {
@@ -78,6 +79,7 @@ class App extends Component {
     }
 
     order = () => {
+
         this.hideColor();
         document.getElementById("orderNav").style.color=" rgb(255, 237, 188";
         this.props.orderBodyHandler(true);

@@ -4,6 +4,7 @@ import Button from "../../Common/Button/Button";
 import axios from "../../../axios/axios-customer";
 import * as actionCreators from "../../../store/action";
 import connect from "react-redux/es/connect/connect";
+import swal from "sweetalert";
 
 class App extends Component {
     state = {
@@ -53,7 +54,7 @@ class App extends Component {
     };
 
     submit = () => {
-        this.props.start(true);
+        // this.props.start(true);
         if (this.state.name.trim() === '') {
             this.isNameBackground();
         } else {
@@ -78,6 +79,13 @@ class App extends Component {
                 .then(response => {
 
                     if(response.status === 200){
+
+                        swal({
+                            text: "Updated!",
+                            icon: "success",
+                            button: "Okay!",
+                        });
+
                         this.didMountTick();
                         this.props.stop(true);
                     }
@@ -88,6 +96,12 @@ class App extends Component {
                 });
 
 
+        }else{
+            swal({
+                text: "Please fill all textfield...!",
+                icon: "warning",
+                button: "Okay!",
+            });
         }
     };
 
@@ -98,6 +112,11 @@ class App extends Component {
 
         axios.delete(`customers/` + id)
             .then(response1 => {
+                swal({
+                    text: "Removed!",
+                    icon: "success",
+                    button: "Okay!",
+                });
 
                 this.didMountTick()
             })
