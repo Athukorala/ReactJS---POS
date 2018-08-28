@@ -71,7 +71,7 @@ class ImageCard extends Component {
 
 };
 
-const smallStyle={color: 'black',padding:'7px',border:'1px solid lightgray',fontSize:'15px'};
+const smallStyle={color: 'dimgray',padding:'7px',border:'1px solid lightgray',fontSize:'15px'};
 const cardBodyStyle = {margin:'0',paddingTop:'5%',paddingBottom:'5%'};
 const smallTextStyle = {margin:'0',color: 'black',fontSize:'13px'};
 const idStyle = {color: 'red'};
