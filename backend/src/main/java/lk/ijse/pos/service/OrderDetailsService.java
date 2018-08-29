@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface OrderDetailsService {
     List<OrderDetails> findAll();
-    List<Object> findAll1();
+    List<Object> findAll1(int id);
 }

@@ -38,11 +38,11 @@ class App extends Component {
                                   date={row[1]} image={Image}/>
             })
         }else{
-            swal({
-                text: "Your connection Lost!",
-                icon: "warning",
-                button: "Okay!",
-            });
+            // swal({
+            //     text: "Your connection Lost!",
+            //     icon: "warning",
+            //     button: "Okay!",
+            // });
         }
 
         return (

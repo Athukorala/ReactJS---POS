@@ -18,8 +18,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     private OrderDetailsRepository repository;
 
     @Override
-    public List<Object> findAll1() {
-        return  repository.getAll();
+    public List<Object> findAll1(int id) {
+        return  repository.getAll(id);
 
     }
 

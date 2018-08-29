@@ -54,6 +54,7 @@ public class ImageUploadController {
     }
 
     private void saveFile(InputStream inputStream, String path) {
+
         File targetFile = new File(path);
 
         try {

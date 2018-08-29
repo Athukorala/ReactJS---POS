@@ -10,9 +10,9 @@ public class AppWideExceptionHandler {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
-    public String handleException(Exception ex){
+    public Exception handleException(Exception ex){
 
-        return ex.getMessage();
+        return ex;
     }
 
 }

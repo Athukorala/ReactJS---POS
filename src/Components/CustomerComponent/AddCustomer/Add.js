@@ -6,7 +6,7 @@ import * as actionCreators from '../../../store/action/index';
 // axios call---
 
 import customerAxios from '../../../axios/axios-customer';
-// import uploadAxios from '../../../axios/axios-imageupload';
+import uploadAxios from '../../../axios/axios-imageupload';
 import {connect} from "react-redux";
 import swal from 'sweetalert';
 import ImageUpload from "../../Common/ImageUpload/ImagUpload";
@@ -26,7 +26,7 @@ class App extends Component {
 
     submit = () => {
 
-        /*
+
         if(this.props.image.length !== 0){
             // bodyFormData.set("file",this.props.image[0].result.split('base64,')[1]);
             // bodyFormData.set("file",this.props.image[0].originFileObj);
@@ -43,7 +43,7 @@ class App extends Component {
                 });
 
         }
-        */
+
 
         if (this.state.name.trim() === '') {
             this.isNameBackground();
