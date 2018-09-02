@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
             int qty = item.getQty();
             int newQty = qty - enterQty;
 
-            Item itemEntity = new Item(itemDTO.getCode(), itemDTO.getDescription(), item.getUnitprice(), newQty);
+            Item itemEntity = new Item(itemDTO.getCode(), itemDTO.getDescription(), item.getUnitprice(), newQty, item.getImage());
 
             od.setOrderdetailsId(pk);
             od.setAmount(itemDTO.getUnitprice());

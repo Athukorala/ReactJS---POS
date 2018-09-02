@@ -14,7 +14,7 @@ class App extends Component {
         price: '',
         itemDetails: [],
         submit: false,
-        image:[]
+        image: []
     };
 
     componentDidMount() {
@@ -91,7 +91,7 @@ class App extends Component {
                 description: this.state.name,
                 qty: this.state.qty,
                 unitprice: this.state.price,
-                image:this.state.image
+                image: this.state.image
             };
             axios.post(`items/` + id, itemObj)
                 .then(response => {
@@ -106,7 +106,7 @@ class App extends Component {
                             icon: "success",
                             button: "Okay!",
                         });
-                    }else{
+                    } else {
                         swal({
                             text: "Failed!",
                             icon: "warning",
@@ -118,7 +118,7 @@ class App extends Component {
                 .catch(error => {
                     console.log(error)
                 });
-        }else{
+        } else {
             swal({
                 text: "Please fill all field...!",
                 icon: "warning",
@@ -149,7 +149,7 @@ class App extends Component {
                     name: response.data.description,
                     price: response.data.unitprice,
                     qty: response.data.qty,
-                    image:response.data.image
+                    image: response.data.image
                 })
             })
 
@@ -162,7 +162,7 @@ class App extends Component {
 
         let id = document.getElementById("example1").value;
         console.log(id);
-        if(id!=="") {
+        if (id !== "") {
             axios.delete(`items/` + id)
                 .then(response1 => {
 
@@ -178,7 +178,7 @@ class App extends Component {
                 .catch(error => {
                     console.log("error: " + error)
                 });
-        }else{
+        } else {
             swal({
                 text: "Please select id...!",
                 icon: "warning",
@@ -199,11 +199,25 @@ class App extends Component {
             <div style={{marginLeft: '10%', marginTop: '3%'}}>
                 <div className="form-group">
                     <label htmlFor="example1">Select Id</label>
-                    <select onChange={(event) => this.idChange(event)} className="form-control" id="example1" style={{
-                       height:'34px',width: '30%',background:'linear-gradient(to left, antiquewhite, white)'
-                    }}>
-                        {options}
-                    </select>
+                    <div className="row">
+                        <div className="col-sm-4">
+                            <select onChange={(event) => this.idChange(event)} className="form-control" id="example1"
+                                    style={{
+                                        height: '34px',
+                                        width: '100%',
+                                        background: 'linear-gradient(to left, antiquewhite, white)'
+                                    }}>
+                                {options}
+                            </select>
+                        </div>
+                        <div className="col-sm-4">
+                            <img src={"http://localhost:8080/images/items/" + this.state.image}
+                                 style={{width: '35px', height: '35px', borderRadius: '35px'}}/>
+                        </div>
+                        <div className="col-sm-4">
+
+                        </div>
+                    </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput1">Item Description</label>
@@ -212,13 +226,15 @@ class App extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput2">Item Qty</label>
-                    <Input type="number" value={this.state.qty} onChange={(event) => this.qtyInput(event.target.value)}
+                    <Input type="number" value={this.state.qty}
+                           onChange={(event) => this.qtyInput(event.target.value)}
                            id="exampleFormControlInput2" placeholder="Qty"/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput3">Item Price</label>
-                    <Input type="number" value={this.state.price} onChange={(event) => this.priceInput(event.target.value)}
+                    <Input type="number" value={this.state.price}
+                           onChange={(event) => this.priceInput(event.target.value)}
                            id="exampleFormControlInput3" placeholder="Price"/>
                 </div>
                 <br/>

@@ -12,7 +12,7 @@ class App extends Component {
         address: '',
         submit: false,
         customerDetails: [],
-        image:''
+        image: ''
     };
 
     componentDidMount() {
@@ -30,14 +30,14 @@ class App extends Component {
                 });
 
                 if (response.data.length !== 0) {
-                    document.getElementById("example1").value=response.data[0].id;
+                    document.getElementById("example1").value = response.data[0].id;
                     axios.get(`customers/` + response.data[0].id)
                         .then(response => {
                             console.log(response.data);
                             this.setState({
                                 name: response.data.name,
                                 address: response.data.address,
-                                image:response.data.image
+                                image: response.data.image
                             })
                         })
 
@@ -71,18 +71,18 @@ class App extends Component {
 
         let id = document.getElementById("example1").value;
 
-        if (this.state.name.trim() !== '' && this.state.address.trim() !== ''  && id !== '') {
+        if (this.state.name.trim() !== '' && this.state.address.trim() !== '' && id !== '') {
 
-            const customerObj={
-                id:id,
-                name:this.state.name,
-                address:this.state.address,
-                image:this.state.image
+            const customerObj = {
+                id: id,
+                name: this.state.name,
+                address: this.state.address,
+                image: this.state.image
             };
-            axios.post(`customers/`+id,customerObj)
+            axios.post(`customers/` + id, customerObj)
                 .then(response => {
 
-                    if(response.status === 200){
+                    if (response.status === 200) {
 
                         swal({
                             text: "Updated!",
@@ -100,7 +100,7 @@ class App extends Component {
                 });
 
 
-        }else{
+        } else {
             swal({
                 text: "Please fill all field...!",
                 icon: "warning",
@@ -113,7 +113,7 @@ class App extends Component {
         // this.props.start(true);
         let id = document.getElementById("example1").value;
         console.log(id);
-        if(id!==""){
+        if (id !== "") {
             axios.delete(`customers/` + id)
                 .then(response1 => {
                     swal({
@@ -128,7 +128,7 @@ class App extends Component {
                 .catch(error => {
                     console.log("error: " + error)
                 });
-        }else{
+        } else {
             swal({
                 text: "Please select id...!",
                 icon: "warning",
@@ -158,7 +158,7 @@ class App extends Component {
                 this.setState({
                     name: response.data.name,
                     address: response.data.address,
-                    image:response.data.image
+                    image: response.data.image
                 })
             })
 
@@ -184,14 +184,17 @@ class App extends Component {
                         <div className="col-sm-4">
                             <select onChange={(event) => this.idChange(event)} className="form-control" id="example1"
                                     style={{
-                                        width: '100%',height:'34px',background:'linear-gradient(to left, antiquewhite, white)'
+                                        width: '100%',
+                                        height: '34px',
+                                        background: 'linear-gradient(to left, antiquewhite, white)'
                                     }}>
                                 {options}
 
                             </select>
                         </div>
                         <div className="col-sm-4">
-                            <img src={"http://localhost:8080/images/customers/"+this.state.image} style={{width:'35px',height:'35px',borderRadius:'35px'}} />
+                            <img src={"http://localhost:8080/images/customers/" + this.state.image}
+                                 style={{width: '35px', height: '35px', borderRadius: '35px'}}/>
                         </div>
                         <div className="col-sm-4">
 
@@ -259,4 +262,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
