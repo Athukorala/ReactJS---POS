@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 public class CustomerController {
 
-    private static String PATH="WEB-INF/CustomerImages";
-
     @Autowired
     private CustomerService service;
 

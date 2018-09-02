@@ -1,6 +1,7 @@
 package lk.ijse.pos.controller;
 //import org.apache.commons.io.IOUtils;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +14,8 @@ import java.nio.file.StandardCopyOption;
 @CrossOrigin
 public class ImageUploadController {
 
-    private static String UPLOAD_DIR = "WEB-INF/images";
+//    private static String UPLOAD_DIR = "WEB-INF/images";
+    private static String UPLOAD_DIR = "images";
 
     @PostMapping("/customer")
     public String uploadCustomerPhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
@@ -22,8 +24,7 @@ public class ImageUploadController {
         try {
 
             String orgFileName = file.getOriginalFilename();
-
-            String path = request.getServletContext().getRealPath("") + UPLOAD_DIR + "/customer" + File.separator + orgFileName;
+            String path = request.getServletContext().getRealPath("")+ UPLOAD_DIR + "/customers" + File.separator + orgFileName;
             InputStream inputStream = file.getInputStream();
 
             saveFile(inputStream, path);
@@ -41,7 +42,7 @@ public class ImageUploadController {
 
             String orgFileName = file.getOriginalFilename();
 
-            String path = request.getServletContext().getRealPath("") + UPLOAD_DIR + "/item" + File.separator + orgFileName;
+            String path = request.getServletContext().getRealPath("") + UPLOAD_DIR + "/items" + File.separator + orgFileName;
             InputStream inputStream = file.getInputStream();
 
             saveFile(inputStream, path);
@@ -67,6 +68,6 @@ public class ImageUploadController {
         }
 
 
-//        IOUtils.closeQuietly(inputStream);
+        IOUtils.closeQuietly(inputStream);
     }
 }

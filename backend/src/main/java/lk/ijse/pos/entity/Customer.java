@@ -12,6 +12,7 @@ public class Customer  implements Serializable {
     private int id;
     private String name;
     private String address;
+    private String image;
 
     public Customer() {
     }
@@ -24,13 +25,18 @@ public class Customer  implements Serializable {
         this.setName(name);
         this.setAddress(address);
     }
-
     public Customer(String name, String address) {
 
         this.setName(name);
         this.setAddress(address);
     }
 
+    public Customer(int id,String name, String address, String image) {
+        this.setId(id);
+        this.name = name;
+        this.address = address;
+        this.image = image;
+    }
 
     public int getId() {
 
@@ -57,12 +63,21 @@ public class Customer  implements Serializable {
         this.address = address;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void saveItem(ItemDTO dto) {
-        repository.save(new Item(dto.getCode(), dto.getDescription(), dto.getUnitprice(),dto.getQty()));
+        repository.save(new Item(dto.getCode(), dto.getDescription(), dto.getUnitprice(),dto.getQty(), dto.getImage()));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

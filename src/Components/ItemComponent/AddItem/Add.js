@@ -4,6 +4,11 @@ import Button from '../../Common/Button/Button';
 import itemAxios from "../../../axios/axios-item";
 import ImageUpload from "../../Common/ImageUpload/ImagUpload";
 import swal from "sweetalert";
+import uploadAxios from "../../../axios/axios-imageupload";
+import * as actionCreators from "../../../store/action";
+import connect from "react-redux/es/connect/connect";
+
+const bodyFormData = new FormData();
 
 class App extends Component {
 
@@ -11,7 +16,8 @@ class App extends Component {
         name: '',
         qty: '',
         price: '',
-        submit: false
+        submit: false,
+        image:''
     };
 
     submit = () => {
@@ -34,13 +40,48 @@ class App extends Component {
         }
 
 
+        if (this.props.image.length !== 0 && this.state.name !== '' && this.state.qty !== '' && this.state.price !== '') {
+
+            this.setState({
+                image: this.props.image.name
+            });
+            this.forceUpdate();
+
+            // bodyFormData.set("file",this.props.image[0].result.split('base64,')[1]);
+            // bodyFormData.set("file",this.props.image[0].originFileObj);
+            bodyFormData.set("file", this.props.image);
+            console.log(bodyFormData)
+
+            uploadAxios.post(`/item`, bodyFormData)
+                .then(response => {
+                    this.saveItem();
+                    console.log(response)
+                })
+
+                .catch(error => {
+                    console.log("error: " + error)
+                });
+
+        } else {
+            swal({
+                text: "Please fill all field...!",
+                icon: "warning",
+                button: "Okay!",
+            });
+        }
+
+    };
+
+    saveItem = () => {
+
         if (this.state.name.trim() !== '' && this.state.qty.trim() !== '' && this.state.price.trim() !== '') {
             console.log("correct")
             const itemObj = {
                 code: 0,
                 description: this.state.name,
                 qty: this.state.qty,
-                unitprice: this.state.price
+                unitprice: this.state.price,
+                image: this.state.image
             };
             itemAxios.put(`items`, itemObj)
                 .then(response => {
@@ -63,7 +104,7 @@ class App extends Component {
                             button: "Okay!",
                         });
 
-                    }else{
+                    } else {
                         swal({
                             text: "Failed!",
                             icon: "warning",
@@ -80,14 +121,8 @@ class App extends Component {
                         button: "Okay!",
                     });
                 });
-        }else{
-            swal({
-                text: "Please fill all textfield...!",
-                icon: "warning",
-                button: "Okay!",
-            });
         }
-    };
+    }
 
     nameInput = (event) => {
         this.setState({name: event});
@@ -111,18 +146,23 @@ class App extends Component {
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput1">Item Description</label>
-                            <Input width="100%" value={this.state.name} onChange={(event) => this.nameInput(event.target.value)} id="exampleFormControlInput1"
+                            <Input width="100%" value={this.state.name}
+                                   onChange={(event) => this.nameInput(event.target.value)}
+                                   id="exampleFormControlInput1"
                                    placeholder="description"/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput2">Item Qty</label>
-                            <Input width="100%" type="number" value={this.state.qty} onChange={(event) => this.qtyInput(event.target.value)} id="exampleFormControlInput2"
+                            <Input width="100%" type="number" value={this.state.qty}
+                                   onChange={(event) => this.qtyInput(event.target.value)} id="exampleFormControlInput2"
                                    placeholder="Qty"/>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput3">Item Price</label>
-                            <Input type="number" width="100%" value={this.state.price} onChange={(event) => this.priceInput(event.target.value)} id="exampleFormControlInput3"
+                            <Input type="number" width="100%" value={this.state.price}
+                                   onChange={(event) => this.priceInput(event.target.value)}
+                                   id="exampleFormControlInput3"
                                    placeholder="Price"/>
                         </div>
                         <br/>
@@ -133,7 +173,6 @@ class App extends Component {
                         <ImageUpload/>
                     </div>
                 </div>
-
 
 
             </div>
@@ -166,5 +205,20 @@ class App extends Component {
     };
 
 }
+const mapStateToProps = (state) => {
 
-export default App;
+    return {
+        image: state.isImageReducer.image
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+        start: (data) => dispatch(actionCreators.startLoading(data)),
+        stop: (data) => dispatch(actionCreators.stopLoading(data)),
+
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

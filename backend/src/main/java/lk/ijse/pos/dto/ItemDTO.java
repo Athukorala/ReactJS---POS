@@ -7,6 +7,7 @@ public class ItemDTO implements Serializable {
     private String description;
     private double unitprice;
     private int qty;
+    private String image;
 
     public ItemDTO() {
     }
@@ -16,6 +17,14 @@ public class ItemDTO implements Serializable {
         this.description = description;
         this.unitprice = unitprice;
         this.qty = qty;
+    }
+
+    public ItemDTO(int code, String description, double unitprice, int qty, String image) {
+        this.code = code;
+        this.description = description;
+        this.unitprice = unitprice;
+        this.qty = qty;
+        this.image = image;
     }
 
     public int getCode() {
@@ -50,6 +59,14 @@ public class ItemDTO implements Serializable {
         this.qty = qty;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "ItemDTO{" +
@@ -57,6 +74,7 @@ public class ItemDTO implements Serializable {
                 ", description='" + description + '\'' +
                 ", unitprice=" + unitprice +
                 ", qty=" + qty +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

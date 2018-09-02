@@ -74,7 +74,7 @@ class ImageCard extends Component {
                 axios.get(`items/` + row[0])
                     .then(response => {
 
-                        msg = msg+"Item name: " + response.data.description + ", price: " + row[2] + ", qty: " + row[3] + '\n'
+                        msg = msg+"  "+response.data.description + "   , price: " + row[2] + "    , qty: " + row[3] + '\n'
                         console.log(msg);
 
                         swal({

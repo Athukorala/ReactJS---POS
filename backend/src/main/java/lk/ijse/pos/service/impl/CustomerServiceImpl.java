@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void saveCustomer(CustomerDTO dto) {
 
-        repository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress()));
+        repository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress(), dto.getImage()));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

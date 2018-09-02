@@ -12,39 +12,19 @@ import swal from 'sweetalert';
 import ImageUpload from "../../Common/ImageUpload/ImagUpload";
 // import AB from "../../Common/ImageUpload/AB";
 
-const bodyFormData=new FormData();
+const bodyFormData = new FormData();
 
 class App extends Component {
 
     state = {
         name: '',
         address: '',
-        submit: false
+        submit: false,
+        image: ''
     };
 
 
-
     submit = () => {
-
-
-        if(this.props.image.length !== 0){
-            // bodyFormData.set("file",this.props.image[0].result.split('base64,')[1]);
-            // bodyFormData.set("file",this.props.image[0].originFileObj);
-            bodyFormData.set("file",this.props.image);
-            console.log(bodyFormData)
-
-            uploadAxios.post(`/customer`,bodyFormData)
-                .then(response => {
-                    console.log(response)
-                })
-
-                .catch(error => {
-                    console.log("error: " + error)
-                });
-
-        }
-
-
         if (this.state.name.trim() === '') {
             this.isNameBackground();
         } else {
@@ -57,22 +37,57 @@ class App extends Component {
             this.noAddressBackground();
         }
 
+
+        if (this.props.image.length !== 0 && this.state.name !== '' && this.state.address !== '') {
+            this.setState({
+                image: this.props.image.name
+            });
+            this.forceUpdate();
+            // bodyFormData.set("file",this.props.image[0].result.split('base64,')[1]);
+            // bodyFormData.set("file",this.props.image[0].originFileObj);
+            bodyFormData.set("file", this.props.image);
+            console.log(bodyFormData)
+
+            uploadAxios.post(`/customer`, bodyFormData)
+                .then(response => {
+                    this.saveImage();
+                    console.log(response)
+                })
+
+                .catch(error => {
+                    console.log("error: " + error)
+                });
+
+        } else {
+            swal({
+                text: "Please fill all field...!",
+                icon: "warning",
+                button: "Okay!",
+            });
+        }
+    };
+
+    saveImage = () => {
+
         if (this.state.name.trim() !== '' && this.state.address.trim() !== '') {
             console.log("correct");
             //this.props.start(true);
-            const customerObj={
-                id:0,
-                name:this.state.name,
-                address:this.state.address
+            const customerObj = {
+                id: 0,
+                name: this.state.name,
+                address: this.state.address,
+                image: this.state.image
+
             };
-            customerAxios.put(`customers`,customerObj)
+            customerAxios.put(`customers`, customerObj)
                 .then(response => {
 
-                    if(response.status === 200){
+                    if (response.status === 200) {
                         this.setState({
                             name: '',
                             address: ''
                         });
+                        
                         this.isNameBackground();
                         this.isAddressBackground();
                         swal({
@@ -82,7 +97,7 @@ class App extends Component {
                             button: "Okay!",
                         });
                         // this.props.stop(true);
-                    }else{
+                    } else {
                         swal({
                             text: "Failed!",
                             icon: "warning",
@@ -99,14 +114,8 @@ class App extends Component {
                         button: "Okay!",
                     });
                 });
-        }else{
-            swal({
-                text: "Please fill all textfield...!",
-                icon: "warning",
-                button: "Okay!",
-            });
         }
-    };
+    }
 
     nameInput = (event) => {
         this.setState({name: event});
@@ -126,12 +135,16 @@ class App extends Component {
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput1">Customer name</label>
-                            <Input width="100%" value={this.state.name} onChange={(event) => this.nameInput(event.target.value)} id="exampleFormControlInput1"
+                            <Input width="100%" value={this.state.name}
+                                   onChange={(event) => this.nameInput(event.target.value)}
+                                   id="exampleFormControlInput1"
                                    placeholder="Name"/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleFormControlInput2">Customer Address</label>
-                            <Input width="100%" value={this.state.address} onChange={(event) => this.addressInput(event.target.value)} id="exampleFormControlInput2"
+                            <Input width="100%" value={this.state.address}
+                                   onChange={(event) => this.addressInput(event.target.value)}
+                                   id="exampleFormControlInput2"
                                    placeholder="Address"/>
                         </div>
                         <br/>
@@ -167,6 +180,7 @@ class App extends Component {
     };
 
 }
+
 const mapStateToProps = (state) => {
 
     return {
@@ -183,4 +197,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
