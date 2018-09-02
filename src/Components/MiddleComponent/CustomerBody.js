@@ -4,6 +4,9 @@ import Add from "../CustomerComponent/AddCustomer/Add";
 import Update from "../CustomerComponent/UpdateCustomer/Update";
 import View from "../CustomerComponent/ViewCustomers/View";
 import SignIn from "../SignInForm/SignIn";
+import * as actionCreators from "../../store/action/BodyActions";
+import * as actionCreator from "../../store/action";
+import connect from "react-redux/es/connect/connect";
 
 const col = {
     marginTop: '2%',
@@ -34,6 +37,8 @@ class App extends Component {
     };
 
     add = () => {
+        const urlArray=[];
+        this.props.imageHandler(urlArray);
         this.setAddBorder();
         this.closeModal();
         this.setState({
@@ -125,4 +130,13 @@ class App extends Component {
 
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+
+        imageHandler: (image) => dispatch(actionCreator.imageHandler(image))
+    }
+};
+
+
+export default connect(null, mapDispatchToProps)(App);

@@ -11,7 +11,8 @@ class App extends Component {
         name: '',
         address: '',
         submit: false,
-        customerDetails: []
+        customerDetails: [],
+        image:''
     };
 
     componentDidMount() {
@@ -35,7 +36,8 @@ class App extends Component {
                             console.log(response.data);
                             this.setState({
                                 name: response.data.name,
-                                address: response.data.address
+                                address: response.data.address,
+                                image:response.data.image
                             })
                         })
 
@@ -74,7 +76,8 @@ class App extends Component {
             const customerObj={
                 id:id,
                 name:this.state.name,
-                address:this.state.address
+                address:this.state.address,
+                image:this.state.image
             };
             axios.post(`customers/`+id,customerObj)
                 .then(response => {
@@ -154,7 +157,8 @@ class App extends Component {
                 console.log(response.data);
                 this.setState({
                     name: response.data.name,
-                    address: response.data.address
+                    address: response.data.address,
+                    image:response.data.image
                 })
             })
 
@@ -173,16 +177,30 @@ class App extends Component {
 
         return (
             <div style={{marginLeft: '10%', marginTop: '5%'}}>
+
                 <div className="form-group">
                     <label htmlFor="example1">Select Id</label>
-                    <select onChange={(event) => this.idChange(event)} className="form-control" id="example1"
-                            style={{
-                                width: '30%',height:'34px',background:'linear-gradient(to left, antiquewhite, white)'
-                            }}>
-                        {options}
+                    <div className="row">
+                        <div className="col-sm-4">
+                            <select onChange={(event) => this.idChange(event)} className="form-control" id="example1"
+                                    style={{
+                                        width: '100%',height:'34px',background:'linear-gradient(to left, antiquewhite, white)'
+                                    }}>
+                                {options}
 
-                    </select>
+                            </select>
+                        </div>
+                        <div className="col-sm-4">
+                            <img src={"http://localhost:8080/images/customers/"+this.state.image} style={{width:'35px',height:'35px',borderRadius:'35px'}} />
+                        </div>
+                        <div className="col-sm-4">
+
+                        </div>
+                    </div>
+
+
                 </div>
+
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput1">Customer name</label>
                     <Input value={this.state.name} onChange={(event) => this.nameInput(event.target.value)}

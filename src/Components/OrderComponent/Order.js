@@ -35,7 +35,7 @@ class App extends Component {
             get = this.state.orderDetails.map((row, index) => {
 
                 return <ImageCard id={row[0]} key={row[0]} name={row[3].name} details={"Order price: " + row[2]}
-                                  date={row[1]} image={Image}/>
+                                  date={row[1]} image={"http://localhost:8080/images/customers/"+row[3].image}/>
             })
         }else{
             // swal({

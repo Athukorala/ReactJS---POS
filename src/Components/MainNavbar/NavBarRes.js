@@ -5,8 +5,7 @@ import connect from "react-redux/es/connect/connect";
 import customerAxios from "../../axios/axios-customer";
 import itemAxios from "../../axios/axios-item";
 import axios from "../../axios/axios-order";
-// import swal from 'sweetalert';
-// import icon from '../../Content/images/ab.png';
+import * as actionCreator from '../../store/action/index';
 
 class App extends Component {
     state = {
@@ -61,12 +60,16 @@ class App extends Component {
     }
 
     cus = () => {
+        const urlArray=[];
+        this.props.imageHandler(urlArray)
         this.hideColor();
         document.getElementById("cusNav").style.color = " rgb(255, 237, 188";
         this.props.customerBodyHandler(true);
     }
 
     item = () => {
+        const urlArray=[];
+        this.props.imageHandler(urlArray)
         this.hideColor();
         document.getElementById("itemNav").style.color = " rgb(255, 237, 188";
         this.props.itemBodyHandler(true);
@@ -227,7 +230,7 @@ const mapDispatchToProps = (dispatch) => {
         itemBodyHandler: (data) => dispatch(actionCreators.itemHandler(data)),
         placeorderBodyHandler: (data) => dispatch(actionCreators.placeorderHandler(data)),
         orderBodyHandler: (data) => dispatch(actionCreators.orderHandler(data)),
-
+        imageHandler: (image) => dispatch(actionCreator.imageHandler(image))
     }
 };
 

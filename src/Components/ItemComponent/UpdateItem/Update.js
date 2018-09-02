@@ -13,7 +13,8 @@ class App extends Component {
         qty: '',
         price: '',
         itemDetails: [],
-        submit: false
+        submit: false,
+        image:[]
     };
 
     componentDidMount() {
@@ -42,7 +43,9 @@ class App extends Component {
                             this.setState({
                                 name: response.data.description,
                                 price: response.data.unitprice,
-                                qty: response.data.qty
+                                qty: response.data.qty,
+                                image: response.data.image
+
                             })
                         })
 
@@ -87,7 +90,8 @@ class App extends Component {
                 code: id,
                 description: this.state.name,
                 qty: this.state.qty,
-                unitprice: this.state.price
+                unitprice: this.state.price,
+                image:this.state.image
             };
             axios.post(`items/` + id, itemObj)
                 .then(response => {
@@ -144,7 +148,8 @@ class App extends Component {
                 this.setState({
                     name: response.data.description,
                     price: response.data.unitprice,
-                    qty: response.data.qty
+                    qty: response.data.qty,
+                    image:response.data.image
                 })
             })
 

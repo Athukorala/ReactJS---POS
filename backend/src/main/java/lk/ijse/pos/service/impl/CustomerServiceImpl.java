@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException("Customer ID mismatched");
         }
         if (repository.existsById(customerId)) {
-            repository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress()));
+            repository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress() ,dto.getImage()));
         }else{
             throw new RuntimeException("Customer doesn't exist");
         }
@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
         System.out.println(customerId);
         Customer customer = repository.findById(customerId).get();
 
-        return new CustomerDTO(customer.getId(), customer.getName(), customer.getAddress());
+        return new CustomerDTO(customer.getId(), customer.getName(), customer.getAddress(),customer.getImage());
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> allCustomers = repository.findAll();
         System.out.println(allCustomers);
         List<CustomerDTO> dtos = new ArrayList<>();
-        allCustomers.forEach(c -> dtos.add(new CustomerDTO(c.getId(), c.getName(), c.getAddress())));
+        allCustomers.forEach(c -> dtos.add(new CustomerDTO(c.getId(), c.getName(), c.getAddress(),c.getImage())));
         return dtos;
     }
 

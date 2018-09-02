@@ -32,7 +32,7 @@ public class ItemServiceImpl implements ItemService {
             throw new RuntimeException("Item ID mismatched");
         }
         if (repository.existsById(itemId)) {
-            repository.save(new Item(dto.getCode(), dto.getDescription(), dto.getUnitprice(),dto.getQty()));
+            repository.save(new Item(dto.getCode(), dto.getDescription(), dto.getUnitprice(),dto.getQty(),dto.getImage()));
         }else{
             throw new RuntimeException("Item doesn't exist");
         }
@@ -49,14 +49,14 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO findItem(int itemId) {
         Item item = repository.findById(itemId).get();
 
-        return new ItemDTO(item.getCode(), item.getDescription(), item.getUnitprice(),item.getQty());
+        return new ItemDTO(item.getCode(), item.getDescription(), item.getUnitprice(),item.getQty() ,item.getImage());
     }
 
     @Override
     public List<ItemDTO> findAllItems() {
         List<Item> allItems = repository.findAll();
         List<ItemDTO> dtos = new ArrayList<>();
-        allItems.forEach(c -> dtos.add(new ItemDTO(c.getCode(), c.getDescription(), c.getUnitprice(),c.getQty())));
+        allItems.forEach(c -> dtos.add(new ItemDTO(c.getCode(), c.getDescription(), c.getUnitprice(),c.getQty(),c.getImage())));
         return dtos;
     }
 }

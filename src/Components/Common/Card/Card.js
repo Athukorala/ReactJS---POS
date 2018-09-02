@@ -141,7 +141,7 @@ const smallStyle = {color: 'dimgray', padding: '7px', border: '1px solid lightgr
 const cardBodyStyle = {margin: '0', paddingTop: '5%', paddingBottom: '5%'};
 const smallTextStyle = {margin: '0', color: 'black', fontSize: '13px'};
 const idStyle = {color: 'red'};
-const imgStyle = {width: '100%', height: '100%', maxWidth: '100%'};
+const imgStyle = {width: '100%', height: '100%', maxWidth: '100%',objectFit:'contain'};
 const dateStyle = {color: 'black', fontSize: '14px'};
 const colStyle = {marginBottom: '10px', marginTop: '10px'};
 

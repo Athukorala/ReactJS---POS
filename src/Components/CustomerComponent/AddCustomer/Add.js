@@ -87,7 +87,7 @@ class App extends Component {
                             name: '',
                             address: ''
                         });
-                        
+
                         this.isNameBackground();
                         this.isAddressBackground();
                         swal({

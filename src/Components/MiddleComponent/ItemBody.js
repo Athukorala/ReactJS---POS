@@ -3,6 +3,8 @@ import classes from './style.css';
 import Add from "../ItemComponent/AddItem/Add";
 import Update from "../ItemComponent/UpdateItem/Update";
 import View from "../ItemComponent/ViewItem/View";
+import * as actionCreator from "../../store/action";
+import connect from "react-redux/es/connect/connect";
 
 const col = {
     marginTop: '2%',
@@ -31,6 +33,8 @@ class App extends Component {
     };
 
     add = () => {
+        const urlArray=[];
+        this.props.imageHandler(urlArray);
         this.setAddBorder();
         this.closeModal();
         this.setState({
@@ -121,5 +125,13 @@ class App extends Component {
     }
 
 }
+const mapDispatchToProps = (dispatch) => {
 
-export default App;
+    return {
+
+        imageHandler: (image) => dispatch(actionCreator.imageHandler(image))
+    }
+};
+
+
+export default connect(null, mapDispatchToProps)(App);
